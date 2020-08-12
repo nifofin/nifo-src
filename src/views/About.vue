@@ -86,7 +86,6 @@
         <h3 id="Todo">Todo</h3>
           <div style="margin-left: 1vw;">
             <ul>
-              <li>Upload a (non obsfucated) version to github</li>
               <li>Make it so that when you double click to create/retrieve a folder, it stops highlighting the text (idk how to do this)</li>
               <li>C++ downloadable thing</li>
               <li>Android thing</li>
@@ -96,6 +95,7 @@
         <h3 id="done">Done</h3>
           <div style="margin-left: 1vw;">
             <ul>
+              <li>Upload a (non obsfucated) version to github</li>
               <li>Make it so that when you click outside of a modal or the setting menu thing it disappears</li>
               <li>Fixed css of the Add Note modal (if the text is too long it looks wack)</li>
             </ul>
