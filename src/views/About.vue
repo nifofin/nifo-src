@@ -1,5 +1,179 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+    <scrollactive class="sidenav" v-on:itemchanged="onItemChanged">
+      <ul style="list-style: none;">
+        <li><a href="#nifo" class="scrollactive-item">Nifo</a></li>
+        <ul style="list-style: none;">
+          <li><a href="#publicaccounts" class="scrollactive-item">Public Accounts</a></li>
+          <ul style="list-style: none;">
+            <li><a href="#edit" class="scrollactive-item">Admin</a></li>
+            <li><a href="#viewonly" class="scrollactive-item">View-only</a></li>
+          </ul>
+          <li><a href="#usage" class="scrollactive-item">Usage</a></li>
+          <ul style="list-style: none;">
+            <li><a href="#gettingstarted" class="scrollactive-item">Getting Started</a></li>
+            <li><a href="#controls" class="scrollactive-item">Actions</a></li>
+            <li><a href="#permissions" class="scrollactive-item">Permissions</a></li>
+          </ul>
+          <li><a href="#FAQ" class="scrollactive-item">FAQ</a></li>
+          <ul style="list-style: none;">
+            <li><a href="#deletingitems" class="scrollactive-item">Deleting Items</a></li>
+          </ul>
+          <li><a href="#contact" class="scrollactive-item">Feedback/Contact</a></li>
+          <ul style="list-style: none;"></ul>
+          <li><a href="todo" class="scrollactive-item">Todo</a></li>
+          <ul style="list-style: none;">
+            <li><a href="Todo" class="scrollactive-item">Todo</a></li>
+            <li><a href="Done" class="scrollactive-item">Done</a></li>
+          </ul>
+        </ul>
+      </ul>
+    </scrollactive>
+    <div class="main">
+      <h1 id="nifo">Nifo</h1>
+      <div style="margin-left: 1vw;">
+        <h2 id="publicaccounts">Public Accounts</h2>
+        <div style="margin-left: 1vw;">
+          <h3 id="edit">Admin: </h3>
+          <div style="margin-left: 1vw;">
+            <p><b>Username: </b>test <b>Password: </b>test</p>
+          </div>
+          <h3 id="viewonly">View-only: </h3>
+          <div style="margin-left: 1vw;">
+            <p> (None of these have a password) </p>
+            <p><b>Username: </b>Biology</p>
+          </div>
+        </div>
+        <h2 id="usage">Usage</h2>
+        <div style="margin-left: 1vw;">
+          <h3 id="gettingstarted">Getting Started</h3>
+          <div style="margin-left: 1vw;">
+            <p>1. Navigate to <b>Home</b>, where you will be redirected to a login page if you are not signed in to an account.</p>
+            <p>2. To login, enter a username and a password.</p>
+            <p style="padding-left: 1vw;">2.a. (Registration) If the entered username is not present in the DB, you will be prompted to register and create an account, and then you will be redirected to the home page.</p>
+            <p>3. At the home page, a root folder that's named your username has already been created. Double click on it to start adding. We support infinite nesting (probably). </p>
+          </div>
+          <h3 id="controls">Actions</h3>
+          <div style="margin-left: 1vw;">
+            <p><b>Single click: </b>Toggle folder expansion</p>
+            <p><b>Double click: </b>Create new folder, retrieve any existing elements from DB, and add an item</p>
+            <p><b>Right click: </b>Show content of element</p>
+            <p><b>Hover: </b>When you hover over an item, an edit button will appear. Click on it to edit or delete the item.</p>
+          </div>
+          <h3 id="permissions">Permissions</h3>
+          <div style="margin-left: 1vw;">
+            <p><b>Admin: </b> Admin permissions allow the user to change the admin password and view password, as well as change the structure and content of the notes.</p>
+            <p><b>View: </b> View permissions, in contrast, are much more limited, only allowing the user to view the list of notes. By default, the view password is empty, although a user with admin permissions may change it in Profile->General->Change View Password.</p>
+          </div>
+      </div>
+      <h2 id="FAQ">FAQ</h2>
+      <div style="margin-left: 1vw;">
+        <h3 id="deletingitems">Deleting/Editing Items</h3>
+        <div style="margin-left: 1vw;">
+        <p><b>Q: </b>If I delete/edit an item, can I undo it / get it back?</p>
+        <p><b>A: </b>No, once you delete or edit it, it's gone forever. </p>
+        <br>
+        <p><b>Q: </b>What happens to the nested items when I delete an item?</p>
+        <p><b>A: </b>The subitems stay in the database forever, and you will never be able to access them again after deleting the parent item, so please either: <br> 1. Delete all subitems before deleting the desired item  <br> 2. Contact one of the developers to delete it for you. </p>
+      </div>
+      </div>
+      <h2 id="contact">Feedback/Contact</h2>
+      <div style="margin-left: 1vw;">
+        <p style="cursor: pointer;" @click="sendEmail">Email </p>
+      </div>
+      <h2 id="todo">Todo</h2>
+      <div style="margin-left: 1vw;">
+        <h3 id="Todo">Todo</h3>
+          <div style="margin-left: 1vw;">
+            <ul>
+              <li>Upload a (non obsfucated) version to github</li>
+              <li>Make it so that when you double click to create/retrieve a folder, it stops highlighting the text (idk how to do this)</li>
+              <li>C++ downloadable thing</li>
+              <li>Android thing</li>
+              <li>Apple thing</li>
+            </ul>
+          </div>
+        <h3 id="done">Done</h3>
+          <div style="margin-left: 1vw;">
+            <ul>
+              <li>Make it so that when you click outside of a modal or the setting menu thing it disappears</li>
+              <li>Fixed css of the Add Note modal (if the text is too long it looks wack)</li>
+            </ul>
+          </div>
+      </div>
+    </div>
+    </div>
+    </div>
 </template>
+
+<script>
+export default {
+  name: 'about',
+  components: {
+  },
+  methods: {
+    sendEmail() {
+      var link = "mailto:victoriarxli^gmail.com".replace("^", "@") + "&subject=" + escape("Nifo - " + this.$store.state.user.username) + "&body=" + escape("Hello, \n");
+      window.location.href = link;
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+ul {
+  padding-inline-start: 1vw;
+}
+
+li {
+  margin: 5px 0px;
+}
+
+.is-active {
+  color: #42b983 !important;
+}
+
+.sidenav {
+  height: 100%;
+  width: 20vw;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  white-space: nowrap;
+  padding-top: 10vh;
+}
+
+.sidenav a {
+  text-decoration: none;
+  color: #2c3e50;
+  text-align: left;
+  margin-left: 2vw;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #42b983;
+}
+
+.main {
+  margin-left: 20vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+.center {
+  text-align: center;
+}
+
+.left, p, h3 {
+  text-align: left;
+}
+
+.about {
+  text-align: left;
+}
+
+</style>

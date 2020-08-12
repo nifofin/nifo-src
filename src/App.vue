@@ -1,14 +1,35 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/home">Home</router-link>
+      <router-link to="/">About</router-link>
+      <router-link v-if="isntLoggedIn && !this.$store.state.user.viewOnly" to="/profile">Profile</router-link>
+      <router-link v-if="isntLoggedIn" to="/login" v-on:click.native="logout()" replace>Logout ({{this.$store.state.user.username}})</router-link>
     </div>
     <router-view />
   </div>
 </template>
 
+<script>
+  export default {
+    name: "App",
+    methods: {
+      logout() {
+        this.$store.commit("clearDetails");
+      }
+    },
+    computed: {
+      isntLoggedIn() {
+        return this.$store.state.user.loggedIn;
+      }
+    }
+  }
+</script>
+
 <style>
+button {
+  outline: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,6 +45,8 @@
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #nav a.router-link-exact-active {

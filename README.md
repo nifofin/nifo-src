@@ -1,4 +1,6 @@
-# example
+# Nifo
+
+Download it and make sure to `npm install` all of the dependencies in `package.json`. 
 
 ## Project setup
 ```
