@@ -24,7 +24,7 @@
           <li><a href="#todo" class="scrollactive-item">Todo</a></li>
           <ul style="list-style: none;">
             <li><a href="#Todo" class="scrollactive-item">Todo</a></li>
-            <li><a href="#Done" class="scrollactive-item">Done</a></li>
+            <li><a href="#done" class="scrollactive-item">Done</a></li>
           </ul>
         </ul>
       </ul>
@@ -79,7 +79,7 @@
       </div>
       <h2 id="contact">Feedback/Contact</h2>
       <div style="margin-left: 1vw;">
-        <p style="cursor: pointer;" @click="sendEmail">Email </p>
+        <p style="cursor: pointer;" @click="sendEmail">Email: sevenisreallycommon at gmail dot com</p>
       </div>
       <h2 id="todo">Todo</h2>
       <div style="margin-left: 1vw;">
@@ -113,7 +113,7 @@ export default {
   },
   methods: {
     sendEmail() {
-      var link = "mailto:victoriarxli^gmail.com".replace("^", "@") + "&subject=" + escape("Nifo - " + this.$store.state.user.username) + "&body=" + escape("Hello, \n");
+      var link = "mailto:sevenisreallycommon^gmail.com".replace("^", "@") + "&subject=" + escape("Nifo - " + this.$store.state.user.username) + "&body=" + escape("Hello, \n");
       window.location.href = link;
     }
   }
