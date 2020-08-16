@@ -21,10 +21,10 @@
           </ul>
           <li><a href="#contact" class="scrollactive-item">Feedback/Contact</a></li>
           <ul style="list-style: none;"></ul>
-          <li><a href="todo" class="scrollactive-item">Todo</a></li>
+          <li><a href="#todo" class="scrollactive-item">Todo</a></li>
           <ul style="list-style: none;">
-            <li><a href="Todo" class="scrollactive-item">Todo</a></li>
-            <li><a href="Done" class="scrollactive-item">Done</a></li>
+            <li><a href="#Todo" class="scrollactive-item">Todo</a></li>
+            <li><a href="#Done" class="scrollactive-item">Done</a></li>
           </ul>
         </ul>
       </ul>

@@ -23,3 +23,9 @@ git commit -m 'deploy'
 git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
 
 cd -
+
+
+# for updating the src
+git add -u
+git commit -m "message"
+git push -f git@github.com:nifofin/nifo-src.git master
