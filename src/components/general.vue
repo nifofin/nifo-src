@@ -105,6 +105,7 @@ export default {
 </script>
 
 <style scoped>
+@import "../assets/styles/variables.css";
 
 .passwords {
   margin-left: 1vw;
@@ -122,11 +123,11 @@ export default {
 
 .changePassButton {
   margin-top: 2vh;
-  border: #8b0000 1.5px solid;
+  border: var(--light-dark-red) 1.5px solid;
   border-radius: 2px;
   padding: 5px 10px;
-  background-color: #ffcccb;
-  color: #8b0000;
+  background-color: var(--light-light-red);
+  color: var(--light-dark-red);
   cursor: pointer;
   outline: none;
 }

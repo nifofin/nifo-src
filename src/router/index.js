@@ -4,12 +4,13 @@ import aboutComponent from "../views/about.vue";
 import loginComponent from "../views/login.vue";
 import homeComponent from "../views/home.vue";
 import profileComponent from "../views/profile.vue";
+import announcementComponent from "../views/announcements.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/docs",
     name: "about",
     component: aboutComponent
   },
@@ -35,8 +36,13 @@ const routes = [
     }
   },
   {
+    path: "/announcements",
+    name: "announcements",
+    component: announcementComponent
+  },
+  {
     path: "*",
-    component: aboutComponent
+    redirect: "/docs"
   }
 ];
 

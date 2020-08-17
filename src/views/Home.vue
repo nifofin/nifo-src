@@ -1,7 +1,9 @@
 <template>
-  <ul>
-    <item class="item" v-for="data in smth.treeData" :model="data" :before="smth" :key="data.id"></item>
-  </ul>
+  <div>
+    <ul>
+      <item class="item" v-for="data in smth.treeData" :model="data" :before="smth" :key="data.id"></item>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -35,6 +37,8 @@ export default {
 </script>
 
 <style scoped>
+@import "../assets/styles/variables.css";
+
 .item {
   text-align: left;
   cursor: pointer;

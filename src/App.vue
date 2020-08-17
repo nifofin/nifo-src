@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/home">Home</router-link>
-      <router-link to="/">About</router-link>
+      <router-link to="/docs">Docs</router-link>
       <router-link v-if="isntLoggedIn && !this.$store.state.user.viewOnly" to="/profile">Profile</router-link>
       <router-link v-if="isntLoggedIn" to="/login" v-on:click.native="logout()" replace>Logout ({{this.$store.state.user.username}})</router-link>
     </div>
@@ -27,15 +27,17 @@
 </script>
 
 <style>
+@import "./assets/styles/variables.css";
+
 button {
   outline: none;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--light-dark);
 }
 
 #nav {
@@ -44,12 +46,12 @@ button {
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: var(--light-dark);
   padding-left: 10px;
   padding-right: 10px;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--light-light);
 }
 </style>

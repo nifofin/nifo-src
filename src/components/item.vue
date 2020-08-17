@@ -11,7 +11,10 @@
       <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
       <button  v-if="isItViewOnly" class="options-button" @click.stop="showOptions = true"><img src="../assets/colorful_icon.png" style="height: 15px; width: auto;"></button>
       <div class="modelContent" style="display: block;" v-if="this.showContent">
-        <div v-for="line in model.content.split('\n')" v-bind:key="line">{{line}}<br></div>
+        <!--<div v-for="line in model.content.split('\n')" v-bind:key="line">{{line}}<br></div>-->
+        <!--<div><v-runtime-template :template="asd"></v-runtime-template></div>
+        <vue-mathjax v-if="false" />-->
+        <div v-html="htmledContent"></div>
       </div>
     </div>
     <ul v-show="open" v-if="isFolder">
@@ -54,6 +57,9 @@
 import Vue from "vue";
 import { db } from "../firestore";
 import Modal from "../components/modal.vue";
+import showdown from "showdown";
+//import VRuntimeTemplate from "v-runtime-template";
+//import {VueMathjax} from "vue-mathjax";
 
 export default {
   name: "item",
@@ -63,6 +69,7 @@ export default {
   },
   data() {
     return {
+      //asd: "<vue-mathjax :formula='htmledContent'></vue-mathjax>",
       showEdit: false,
       open: false,
       showing: false,
@@ -87,12 +94,17 @@ export default {
     },
     isItViewOnly() {
       return !this.$store.state.user.viewOnly;
+    },
+    htmledContent() {
+      var converter = new showdown.Converter({simpleLineBreaks: true});
+      return converter.makeHtml(this.model.content);
     }
   },
   methods: {
     handler(e) {
       this.showContent = !this.showContent;
       e.preventDefault();
+      this.$nextTick().then(()=>{window.MathJax.typeset(); })
     },
     toggle() {
       if (this.isFolder) { this.open = !this.open; }
@@ -156,12 +168,16 @@ export default {
     }
   },
   components: {
-    Modal
+    Modal,
+    //VRuntimeTemplate,
+    //"vue-mathjax": VueMathjax
   }
 };
 </script>
 
 <style scoped>
+@import "../assets/styles/variables.css";
+
 div, span {
   display: inline;
 }

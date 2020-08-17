@@ -34,6 +34,8 @@ export default {
 </script>
 
 <style scope>
+@import "../assets/styles/variables.css";
+
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -65,7 +67,7 @@ export default {
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  color: var(--light-light);
 }
 
 .modal-body {
@@ -76,7 +78,7 @@ export default {
   float: right;
   border: none;
   color: white;
-  background-color: #42b983;
+  background-color: var(--light-light);
   text-align: center;
   padding: 5px 10px;
   cursor: pointer;

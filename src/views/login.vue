@@ -102,22 +102,23 @@ export default {
 </script>
 
 <style scoped>
+@import "../assets/styles/variables.css";
 
 .asdf {
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 5px 10px;
-  border: #2c3e50 1.5px solid;
+  border: var(--light-dark) 1.5px solid;
   border-radius: 2px;
 }
 
 .asdf:focus {
-  border: #2c3e50 2px solid;
+  border: var(--light-dark) 2px solid;
   border-radius: 2px;
 }
 
 .login-button {
-  border: #2c3e50 1.25px solid;
+  border: var(--light-dark) 1.25px solid;
   border-radius: 2px;
   margin-top: 10px;
   padding: 5px 10px;
@@ -126,14 +127,14 @@ export default {
 }
 
 .login-button:hover {
-  border: #42b983 1.25px solid;
+  border: var(--light-light) 1.25px solid;
   border-radius: 2px;
-  color: #42b983;
+  color: var(--light-light);
   background-color: rgba(200, 200, 200, 0.2);
 }
 
 .login-button:focus {
-  border: #2c3e50 2px solid;
+  border: var(--light-dark) 2px solid;
   border-radius: 2px;
 }
 

@@ -3,18 +3,21 @@
     <div v-if="showSidenav" class="sidenav" v-on-clickaway="away">
       <button class="close-sidenav-button" style="background-color: transparent;" @click="showSidenav = false"><img style="height: 20px; width: auto; background-color: transparent;" src="../assets/white_x.png"></button>
       <ul style="list-style: none;">
-        <li><button class="sidebar-button" @click="menuPartShown = 'general'">General</button></li>
+        <li><button class="sidebar-button" @click="menuPartShown = 'general'; showSidenav = false">General</button></li>
+        <li><button class="sidebar-button" @click="menuPartShown = 'appearance'; showSidenav = false">Appearance</button></li>
       </ul>
     </div>
     <div class="main">
       <button class="open-sidenav-button" @click="showSidenav = true"><img style="height: 30px; width: auto;" src="../assets/menu.png"></button>
       <general v-if="menuPartShown == 'general'"></general>
+      <appearance v-if="menuPartShown == 'appearance'"></appearance>
     </div>
   </div>
 </template>
 
 <script>
 import general from "../components/general.vue";
+import appearance from "../components/appearance.vue";
 import { mixin as clickaway } from "vue-clickaway";
 
 export default {
@@ -27,7 +30,8 @@ export default {
     }
   },
   components: {
-    general
+    general,
+    appearance
   },
   methods: {
     away: function() {
@@ -38,19 +42,22 @@ export default {
 </script>
 
 <style scoped>
+@import "../assets/styles/variables.css";
 
 .sidebar-button {
   background-color: transparent;
   border: none;
   outline: none;
   color: white;
-  float: left;
   cursor: pointer;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .sidenav {
   height: 100%;
-  width: 30vw;
+  width: 25vw;
   position: fixed;
   z-index: 1;
   top: 0;
