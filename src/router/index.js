@@ -42,7 +42,7 @@ const routes = [
   },
   {
     path: "*",
-    redirect: "/docs"
+    redirect: "/home"
   }
 ];
 

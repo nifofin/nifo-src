@@ -40,8 +40,12 @@
       <h1 id="nifo">Nifo</h1>
       <div style="margin-left: 1vw;">
         <h3 id="introduction">Introduction</h3>
-        <p>Nifo is a simple note-taking/note-keeping application with a collapsible structure to simplify organization. </p>
+        <p>Nifo is a simple note-taking/note-keeping application with a collapsible tree structure to simplify organization. </p>
         <p>First created in August 2020, <a class="routerLink" href="https://nifofin.github.io/nifo/">Nifo</a> includes a wide range of features, detailed in the <a class="routerLink" href="#done">Todo - Done</a> section below. </p>
+        <p>Nifo currently supports the following types of formatting:</p>
+        <p><ul style="list-style: none;"><li>- Markdown</li><li>- TeX</li></ul></p>
+        <p>For a quick introduction, jump to <a class="routerLink" href="#gettingstarted">Getting Started</a></p>
+        <p>For a list of public accounts/resources, jump to the <a class="routerLink" href="#publicaccounts">public accounts</a> section.</p>
         <!--<p>Features include: </p>
         <ul style="margin-left: 1vw;">
           <li>Notes presented in a tree/folder structure, with both content and subfolders toggleable with a <a href="#controls" class="routerLink">single click</a>. </li>
