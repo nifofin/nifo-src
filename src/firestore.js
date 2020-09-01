@@ -15,3 +15,5 @@ var firebaseConfig = {
 const db = firebase.initializeApp(firebaseConfig).firestore();
 
 export { firebase , db };
+
+// some reference: https://firebase.google.com/docs/firestore/quickstart

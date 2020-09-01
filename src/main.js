@@ -91,20 +91,36 @@ window.addEventListener("keydown", (e) => {
 })
 */
 
+
+// Uses the Vue router: https://router.vuejs.org/guide/
+// and the Vuex store: https://vuex.vuejs.org/guide/
+// More specifically, this section: https://router.vuejs.org/guide/advanced/meta.html
+// Basically it just redirects you if you don't have permission to enter a page
 router.beforeEach( (to, from, next) => {
+  // meta.auth is what we set in /src/router/index.js
+  // store.state.user.loggedIn is in /src/router/index.js - check the const store variable
   if (to.meta.auth && !store.state.user.loggedIn) {
+    // if the router is trying to redirect you to /profile, and if you have admin perms (or only viewOnly / editOnly perms)
     if (to.name == "profile" && !store.state.user.viewOnly && !store.state.user.editOnly) {
+      // if you have admin perms, go ahead
       next("/profile");
     }
+    // otherwise, go to the login page :(
     else {
       next("/login");
     }
   }
+  // else, if you're not trying to go to a protected route, go ahead to wherever you want to go
   else {
     next();
   }
 })
 
+// create a new Vue instance
+// some reference: https://vuejs.org/v2/guide/instance.html
+// https://forum.vuejs.org/t/what-does-render-h-h-app-mean/53313/2
+// https://vuejs.org/v2/guide/render-function.html
+// look at App.vue next 
 new Vue({
   router,
   store,

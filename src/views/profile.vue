@@ -1,15 +1,27 @@
 <template>
   <div class="profile">
+
+    <!-- side navigation bar -->
     <div v-if="showSidenav" class="sidenav" v-on-clickaway="away">
       <ul class="random-ul">
+        <!-- button to close side navigation bar -->
         <button class="transparent-button close-sidenav" @click="showSidenav = false"><img class="close-image" src="../assets/white_x.png"></button>
+
+        <!-- the various components/tabs you can choose from -->
         <li><a class="sidenav-text" @click="tab('general')">General</a></li>
         <li><a class="sidenav-text" @click="tab('appearance')">Appearance</a></li>
       </ul>
     </div>
+
+    <!-- main display thing -->
     <div class="main">
+      <!-- button to open side navigation bar -->
       <button class="transparent-button open-sidenav left" @click="showSidenav = true"><img class="open-image" src="../assets/menu.png"></button>
+
+      <!-- show the General component in /src/components/general.vue -->
       <general v-if="menuPartShown == 'general'"></general>
+
+      <!-- show the Appearance component in /src/components/appearance.vue -->
       <appearance v-if="menuPartShown == 'appearance'"></appearance>
     </div>
   </div>

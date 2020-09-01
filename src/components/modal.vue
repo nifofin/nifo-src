@@ -3,6 +3,9 @@
      <div class="modal-wrapper" @click.self="$emit('close')">
        <div class="modal-container">
 
+         <!-- what exactly *is* a modal window? : https://en.wikipedia.org/wiki/Modal_window -->
+         <!-- something interesting to read: https://vuejs.org/v2/guide/components-slots.html -->
+
          <div class="modal-header">
            <slot name="header">
              default header

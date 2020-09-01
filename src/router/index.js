@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import aboutComponent from "../views/about.vue";
+import docsComponent from "../views/about.vue";
 import loginComponent from "../views/login.vue";
 import homeComponent from "../views/home.vue";
 import profileComponent from "../views/profile.vue";
@@ -11,8 +11,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/docs",
-    name: "about",
-    component: aboutComponent
+    name: "docs",
+    component: docsComponent
   },
   {
     path: "/login",

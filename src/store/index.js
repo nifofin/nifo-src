@@ -1,18 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
-//import VuexEasyFirestore from "vuex-easy-firestore";
-// import { firebase } from "../firestore.js";
 
 Vue.use(Vuex);
 
-//const easyFirestore = VuexEasyFirestore([notes], {
-//  logging: true, FirebaseDependency: Firebase })
-
+// I'm using the vuex store because it lets me store and access some things globally, which is really convenient
 const store = new Vuex.Store({
   state: {
     user: {
       username: "",
       password: "",
+      // I could probably just make one variable called logState that's a string, but who cares ;)
       loggedIn: false,
       viewOnly: false,
       editOnly: false
@@ -43,11 +40,5 @@ const store = new Vuex.Store({
   },
   actions: {},
 });
-
-//initFirebase().catch(error => {
-  // take user to a page stating an error occurred
-  // (might be a connection error, or the app is open in another tab)
-//  console.error(error);
-//});
 
 export default store;

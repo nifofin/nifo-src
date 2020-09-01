@@ -6,6 +6,7 @@
       <router-link v-if="isLoggedIn && !this.$store.state.user.viewOnly && !this.$store.state.user.editOnly" to="/profile">Profile</router-link>
       <a v-if="isLoggedIn" v-on:click="logout()" replace>Logout ({{this.$store.state.user.username}})</a>
     </div>
+    
     <router-view />
   </div>
 </template>
@@ -15,9 +16,14 @@
     name: "App",
     methods: {
       logout() {
+        // clears info from the store
         this.$store.commit("clearDetails");
+
+        // clears info from localstorage
         window.localStorage.removeItem("nifo_login");
         window.localStorage.removeItem("nifo_login2");
+
+        // redirect to /login so you can login to an account
         this.$router.replace("/login");
       }
     },
