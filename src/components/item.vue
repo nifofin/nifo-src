@@ -144,12 +144,14 @@ export default {
         .then(function(querySnapshot) {
           if (querySnapshot.empty) {
             if (!_self.changedBCEsc) {_self.showing = true;}
-            else {
-              _self.changedBCEsc = false;
-              querySnapshot.forEach(function(doc) {
-              if (!_self.model.children.includes(doc)) {_self.model.children.push({name: doc.data().name, content: doc.data().content, depth: _self.model.depth+1, id: doc.id}); }
-          });
-          _self.model.children.sort((a,b) => (a.name > b.name) ? 1 : -1);}
+            _self.changedBCEsc = false;
+          }
+          else {
+            querySnapshot.forEach(function(doc) {
+            if (!_self.model.children.includes(doc)) {_self.model.children.push({name: doc.data().name, content: doc.data().content, depth: _self.model.depth+1, id: doc.id}); }});
+            _self.model.children.sort((a,b) => (a.name > b.name) ? 1 : -1);
+          }
+          _self.changing = false;
         });
         this.open = true;
       }
