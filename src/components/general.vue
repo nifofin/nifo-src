@@ -3,6 +3,7 @@
     <h1>General Settings</h1>
     <div class="passwords">
       <h2>Change Passwords</h2>
+
       <div class="adminPass">
         <h3>Change Admin Password</h3>
         <div style="margin: 1vh 1vw;">
@@ -13,6 +14,7 @@
           <button class="changePassButton" @click="APass = true">Change Admin Password</button>
         </div>
       </div>
+
       <div class="editPass">
         <h3>Change Editor Password</h3>
         <div style="margin: 1vh 1vw;">
@@ -23,6 +25,7 @@
           <button class="changePassButton" @click="EPass = true">Change Editor Password</button>
         </div>
       </div>
+
       <div class="viewPass">
         <h3>Change View Password</h3>
         <div style="margin: 1vh 1vw;">
@@ -34,6 +37,7 @@
         </div>
       </div>
     </div>
+
     <!-- modals now yay -->
     <modal v-if="APass" @close="APass = false">
       <h3 slot="header">Confirm admin password change</h3>
@@ -67,7 +71,6 @@
         <button @click="changeVPass" style="float: right; border: none; color: white; background-color: #42b983; text-align: center; padding: 5px 10px; cursor: pointer; border-radius: 2px;">Change</button>
       </div>
     </modal>
-
   </div>
 </template>
 

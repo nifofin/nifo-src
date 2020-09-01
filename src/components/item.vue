@@ -1,26 +1,19 @@
 <template>
   <li>
-    <div
-      :class="{bold: isFolder}"
-      @click="toggle"
-      @dblclick="changeType"
-      @contextmenu="handler($event)"
-      style="width: 100vw;"
-      class="hovering">
+    <div :class="{bold: isFolder}" @click="toggle" @dblclick="changeType" @contextmenu="handler($event)" style="width: 100vw;" class="hovering">
       <p style="display: inline-block; margin: 0;">{{model.name}}</p>
       <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
       <button  v-if="isItViewOnly" class="options-button" @click.stop="showOptions = true"><img src="../assets/colorful_icon.png" style="height: 15px; width: auto;"></button>
       <div class="modelContent" style="display: block;" v-if="this.showContent">
-        <!--<div v-for="line in model.content.split('\n')" v-bind:key="line">{{line}}<br></div>-->
-        <!--<div><v-runtime-template :template="asd"></v-runtime-template></div>
-        <vue-mathjax v-if="false" />-->
         <div v-html="htmledContent"></div>
       </div>
     </div>
+
     <ul v-show="open" v-if="isFolder">
       <item class="item" v-for="mdl in model.children" :model="mdl" :before="model" :key="mdl.id"></item>
       <li v-if="isItViewOnly" class="add" @click="addChild">+</li>
     </ul>
+
     <!-- Modal for adding -->
     <modal v-if="this.showing && isItViewOnly" @close="showing = false">
       <h3 slot="header">Add note</h3>
@@ -35,6 +28,7 @@
         <button class="modal-default-button" @click.stop="submitNote">Ok</button>
       </div>
     </modal>
+    
     <!-- Modal for options  -->
     <modal v-if="showOptions && isItViewOnly" @close="showOptions = false">
       <h3 slot="header">Options</h3>

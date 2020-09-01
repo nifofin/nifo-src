@@ -3,8 +3,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link>
       <router-link to="/docs">Docs</router-link>
-      <router-link v-if="isntLoggedIn && !this.$store.state.user.viewOnly && !this.$store.state.user.editOnly" to="/profile">Profile</router-link>
-      <a style="cursor: pointer;" v-if="isntLoggedIn" v-on:click="logout()" replace>Logout ({{this.$store.state.user.username}})</a>
+      <router-link v-if="isLoggedIn && !this.$store.state.user.viewOnly && !this.$store.state.user.editOnly" to="/profile">Profile</router-link>
+      <a v-if="isLoggedIn" v-on:click="logout()" replace>Logout ({{this.$store.state.user.username}})</a>
     </div>
     <router-view />
   </div>
@@ -22,7 +22,7 @@
       }
     },
     computed: {
-      isntLoggedIn() {
+      isLoggedIn() {
         return this.$store.state.user.loggedIn;
       }
     }
@@ -37,10 +37,11 @@ button {
 }
 #app {
   font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--text);
+  text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: var(--dark);
 }
 
 #nav {
@@ -49,17 +50,11 @@ button {
 
 #nav a {
   font-weight: bold;
-  color: var(--dark);
-  padding-left: 10px;
-  padding-right: 10px;
+  color: var(--text);
+  padding: 0 10px;
 }
 
 #nav a.router-link-exact-active {
-  color: var(--light);
-}
-
-a {
-  color: var(--light);
-  text-decoration: none;
+  color: var(--text-accent);
 }
 </style>

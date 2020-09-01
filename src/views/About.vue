@@ -41,17 +41,17 @@
       <div style="margin-left: 1vw;">
         <h3 id="introduction">Introduction</h3>
         <p>Nifo is a simple note-taking/note-keeping application with a collapsible tree structure to simplify organization. </p>
-        <p>First created in August 2020, <a class="routerLink" href="https://nifofin.github.io/nifo/">Nifo</a> includes a wide range of features, detailed in the <a class="routerLink" href="#done">Todo - Done</a> section below. </p>
+        <p>First created in August 2020, <a href="https://nifofin.github.io/nifo/">Nifo</a> includes a wide range of features, detailed in the <a href="#done">Todo - Done</a> section below. </p>
         <p>Nifo currently supports the following types of formatting:</p>
         <p><ul style="list-style: none;"><li>- Markdown</li><li>- TeX</li></ul></p>
-        <p>For a quick introduction, jump to <a class="routerLink" href="#gettingstarted">Getting Started</a></p>
-        <p>For a list of public accounts/resources, jump to the <a class="routerLink" href="#publicaccounts">public accounts</a> section.</p>
+        <p>For a quick introduction, jump to <a href="#gettingstarted">Getting Started</a></p>
+        <p>For a list of public accounts/resources, jump to the <a href="#publicaccounts">public accounts</a> section.</p>
         <!--<p>Features include: </p>
         <ul style="margin-left: 1vw;">
-          <li>Notes presented in a tree/folder structure, with both content and subfolders toggleable with a <a href="#controls" class="routerLink">single click</a>. </li>
-          <li>All information stored in the <a href="https://firebase.google.com/docs/firestore" class="routerLink">Firestore database</a>, enabling realtime updates. </li>
+          <li>Notes presented in a tree/folder structure, with both content and subfolders toggleable with a <a href="#controls">single click</a>. </li>
+          <li>All information stored in the <a href="https://firebase.google.com/docs/firestore">Firestore database</a>, enabling realtime updates. </li>
           <li>Adding, editing, and deleting of notes with a modal window. </li>
-          <li>Simple sharing—<a href="#permissions" class="routerLink">editor/collaborator permissions and view-only permissions.</a></li>
+          <li>Simple sharing—<a href="#permissions">editor/collaborator permissions and view-only permissions.</a></li>
           <li>And more</li>
         </ul>-->
 
@@ -73,8 +73,8 @@
           </div>
           <h3 id="contributing">Contributing: </h3>
           <div style="margin-left: 1vw;">
-            <p>If you wish to contribute to one of the public accounts (i.e. add notes for a textbook or something), please <a href="#contact" class="routerLink">email or DM</a> one of the developers. </p>
-            <p>If you wish to add an account to the public accounts list, please <a href="#contact" class="routerLink">email or DM</a> one of the developers. </p>
+            <p>If you wish to contribute to one of the public accounts (i.e. add notes for a textbook or something), please <a href="#contact">email or DM</a> one of the developers. </p>
+            <p>If you wish to add an account to the public accounts list, please <a href="#contact">email or DM</a> one of the developers. </p>
           </div>
         </div>
 
@@ -112,7 +112,7 @@
           <div style="margin-left: 1vw;">
             <p><b>Admin: </b> Admin permissions allow the user to change the admin password and view password, as well as change the structure and content of the notes.</p>
             <p><b>Editor: </b>Editor permissions allow the user to view and change the structure and content of the notes. By default, the editor password is the same as the admin password, meaning that you must go to Profile - General Settings - Change Passwords - Change Editor Password and change it to something different first. </p>
-            <p><b>View: </b> View permissions, in contrast, are much more limited, only allowing the user to view the list of notes. By default, the view password is empty, although a user with admin permissions may change it in <router-link class="routerLink" to="/profile">Profile->General->Change View Password.</router-link></p>
+            <p><b>View: </b> View permissions, in contrast, are much more limited, only allowing the user to view the list of notes. By default, the view password is empty, although a user with admin permissions may change it in <router-link to="/profile">Profile->General->Change View Password.</router-link></p>
             <p>Note: This is the order of importance from high to low, meaning if two or more permission types have the same password, the highest permission type will be granted upon sign-in.</p>
           </div>
       </div>
@@ -127,7 +127,7 @@
           <p><b>A: </b>No, once you delete or edit it, it's gone forever. </p>
           <br>
           <p><b>Q: </b>What happens to the nested items when I delete an item?</p>
-          <p><b>A: </b>The subitems stay in the database forever, and you will never be able to access them again after deleting the parent item, so please either: <br> 1. Delete all subitems before deleting the desired item  <br> 2. <a href="#contact" class="routerLink">Contact</a> one of the developers to delete it for you. </p>
+          <p><b>A: </b>The subitems stay in the database forever, and you will never be able to access them again after deleting the parent item, so please either: <br> 1. Delete all subitems before deleting the desired item  <br> 2. <a href="#contact">Contact</a> one of the developers to delete it for you. </p>
           <br>
         </div>
         <h3 id="misc-faq">Misc</h3>
@@ -139,7 +139,7 @@
         <br>
 
         <p><b>Q: </b>What happens if I take a common username that may be used as a public account in the future? </p>
-        <p><b>A: </b>If your username is used as a public account, your account's username will be changed (i.e. if your username was "C++", it could be changed to "C++1"). If it is changed, you will find a notice of it on the <router-link class="routerLink" to="/announcements">Announcements</router-link> page. </p>
+        <p><b>A: </b>If your username is used as a public account, your account's username will be changed (i.e. if your username was "C++", it could be changed to "C++1"). If it is changed, you will find a notice of it on the <router-link to="/announcements">Announcements</router-link> page. </p>
 
         <br>
 
@@ -289,12 +289,12 @@
         <h3 id="external">External Stuff</h3>
         <div style="margin-left: 1vw;">
           <ul>
-            <li><a href="https://vuejs.org/" class="routerLink">Vue.js</a> (and things from vue-cli)</li>
-            <li><a href="https://firebase.google.com/" class="routerLink">Firebase</a> (firestore db)</li>
-            <li><a href="https://github.com/showdownjs/showdown" class="routerLink">Showdown</a> (for markdown -> html)</li>
-            <li><a href="https://github.com/eddiemf/vue-scrollactive" class="routerLink">VueScrollactive</a> (for docs index highlighting)</li>
-            <li><a href="https://github.com/simplesmiler/vue-clickaway" class="routerLink">VueClickaway</a> (for sidebar hiding when clicking on another portion of the screen)</li>
-            <li><a href="https://www.mathjax.org/" class="routerLink">MathJax</a> (for rendering math stuff)</li>
+            <li><a href="https://vuejs.org/">Vue.js</a> (and things from vue-cli)</li>
+            <li><a href="https://firebase.google.com/">Firebase</a> (firestore db)</li>
+            <li><a href="https://github.com/showdownjs/showdown">Showdown</a> (for markdown -> html)</li>
+            <li><a href="https://github.com/eddiemf/vue-scrollactive">VueScrollactive</a> (for docs index highlighting)</li>
+            <li><a href="https://github.com/simplesmiler/vue-clickaway">VueClickaway</a> (for sidebar hiding when clicking on another portion of the screen)</li>
+            <li><a href="https://www.mathjax.org/">MathJax</a> (for rendering math stuff)</li>
           </ul>
         </div>
       </div>
@@ -318,30 +318,17 @@ export default {
 <style scoped>
 @import "../assets/styles/variables.css";
 
-hr {
-  height: 1px;
-  border: 0;
-  color: var(--dark);
-  background-color: var(--dark);
+.about {
+  text-align: left;
 }
 
-.routerLink {
-  color: var(--light);
-  text-decoration: none;
-}
-
-ul {
-  padding-inline-start: 1vw;
-}
-
-li {
-  margin: 5px 0px;
-}
-
+/* scrollactive */
 .is-active {
   color: #42b983 !important;
 }
 
+
+/* sidenav */
 .sidenav {
   height: 100%;
   width: 20vw;
@@ -349,7 +336,7 @@ li {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: white;
+  background-color: var(--background);
   white-space: nowrap;
   padding-top: 10vh;
   overflow-x: hidden;
@@ -357,34 +344,19 @@ li {
 }
 
 .sidenav a {
-  text-decoration: none;
-  color: var(--dark);
+  color: var(--text);
   text-align: left;
   margin-left: 2vw;
   display: block;
 }
-
 .sidenav a:hover {
-  color: var(--light);
+  color: var(--text-accent);
 }
+
+
 
 .main {
-  margin-left: 20vw;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  padding-bottom: 15vh;
+  margin: 0 0 0 20vw;
+  padding: 0 5vw 15vh 5vw;
 }
-
-.center {
-  text-align: center;
-}
-
-.left, p, h3 {
-  text-align: left;
-}
-
-.about {
-  text-align: left;
-}
-
 </style>

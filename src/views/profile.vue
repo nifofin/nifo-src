@@ -1,14 +1,14 @@
 <template>
   <div class="profile">
     <div v-if="showSidenav" class="sidenav" v-on-clickaway="away">
-      <button class="close-sidenav-button" style="background-color: transparent;" @click="showSidenav = false"><img style="height: 20px; width: auto; background-color: transparent;" src="../assets/white_x.png"></button>
-      <ul style="list-style: none;">
-        <li><button class="sidebar-button" @click="menuPartShown = 'general'; showSidenav = false">General</button></li>
-        <li><button class="sidebar-button" @click="menuPartShown = 'appearance'; showSidenav = false">Appearance</button></li>
+      <ul class="random-ul">
+        <button class="transparent-button close-sidenav" @click="showSidenav = false"><img class="close-image" src="../assets/white_x.png"></button>
+        <li><a class="sidenav-text" @click="tab('general')">General</a></li>
+        <li><a class="sidenav-text" @click="tab('appearance')">Appearance</a></li>
       </ul>
     </div>
     <div class="main">
-      <button class="open-sidenav-button" @click="showSidenav = true"><img style="height: 30px; width: auto;" src="../assets/menu.png"></button>
+      <button class="transparent-button open-sidenav left" @click="showSidenav = true"><img class="open-image" src="../assets/menu.png"></button>
       <general v-if="menuPartShown == 'general'"></general>
       <appearance v-if="menuPartShown == 'appearance'"></appearance>
     </div>
@@ -36,6 +36,10 @@ export default {
   methods: {
     away: function() {
       if (this.showSidenav) { this.showSidenav = false; }
+    },
+    tab: function(s) {
+      this.menuPartShown = s;
+      this.showSidenav = false;
     }
   }
 }
@@ -44,17 +48,11 @@ export default {
 <style scoped>
 @import "../assets/styles/variables.css";
 
-.sidebar-button {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: white;
-  cursor: pointer;
-  display: block;
-  margin-bottom: 10px;
-  margin-top: 10px;
+.profile {
+  text-align: left;
 }
 
+/* Sidenav */
 .sidenav {
   height: 100%;
   width: 25vw;
@@ -62,31 +60,36 @@ export default {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgba(1, 1, 1, 1);
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 10vh;
+  background-color: var(--background-dark);
 }
 
-.close-sidenav-button, .close-sidenav-button:focus {
-  border: none;
-  background-color: transparent;
-  float: right;
-  color: white;
-  margin-right: 5vw;
-  font-size: 16px;
-  outline: none;
-  cursor: pointer;
+/* text for switching tabs */
+.sidenav-text {
+  color: var(--text-light);
+  font-size: 2vh;
 }
 
-.open-sidenav-button {
-  border: none;
-  background-color: transparent;
-  margin-left: 5vw;
+/* close sidenav */
+.close-sidenav, .close-sidenav:focus {
+  margin: 10vh 0 0 15vw;
+}
+
+.close-image {
+  height: 2vw;
+  width: auto;
+}
+
+/* open sidenav */
+.open-sidenav {
+  margin: 0 0 0 5vw;
   padding: 0;
-  cursor: pointer;
-  float: left;
-  outline: none;
+}
+
+.open-image {
+  height: 4vw;
+  width: auto;
 }
 
 </style>

@@ -25,20 +25,26 @@ export default {
   },
   mounted() {
     var _self = this;
+
+    // retrieve whatever has depth 0 (the root folder)
     db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection("depth0").get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
+        // add it to treeData
         _self.smth.treeData.push({name: doc.data().name, content: doc.data().content, depth: 0, id: doc.id, parent: "none"});
       })
+
+    // if there's nothing for some odd reason, push a sample one
     if (_self.smth.treeData.length == 0) { _self.smth.treeData.push({name: "Sample", content: "Sample content", depth: 0, id: "1"}); }
     })
+
+    // import and export
     window.addEventListener("keydown", (e) => {
       if (e.key == "i") {
         // import
       }
       else if (e.key == "o" && this.$router.currentRoute.path == "/") {
         // export
-        // clean up json
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.smth.treeData, ["name", "content", "children", ""], 4));
         var downloadAnchorNode = document.createElement('a');
         downloadAnchorNode.setAttribute("href",     dataStr);

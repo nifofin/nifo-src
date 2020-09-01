@@ -67,7 +67,7 @@ export default {
 
 .modal-header h3 {
   margin-top: 0;
-  color: var(--light);
+  color: var(--text-accent);
 }
 
 .modal-body {
@@ -78,7 +78,7 @@ export default {
   float: right;
   border: none;
   color: white;
-  background-color: var(--light);
+  background-color: var(--text-accent);
   text-align: center;
   padding: 5px 10px;
   cursor: pointer;
