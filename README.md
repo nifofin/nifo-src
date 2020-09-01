@@ -22,7 +22,6 @@ Nifo currently uses the following:
 If you wish to contribute to Nifo, please contact one of the developers by:
 
 - emailing sevenisreallycommon at gmail dot com
-- PMing a fluffy fruit#7626 on Discord
 
 If you have any feedback or suggestions, please let us know by contacting us or submitting an issue.
 

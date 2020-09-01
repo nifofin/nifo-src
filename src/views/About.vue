@@ -162,7 +162,6 @@
       <div style="margin-left: 1vw;">
         <p>If you encounter any issues, have any feedback on how to improve the UI and/or features to implement, or just want to talk, contact one of the developers!</p>
         <p style="cursor: pointer;" @click="sendEmail">Email: sevenisreallycommon at gmail dot com</p>
-        <p>Discord: a fluffy fruit#7626</p>
       </div>
 
       <hr>
