@@ -130,7 +130,7 @@ export default {
               console.log("Updated details in the store");
 
               // localstorage for login persistence
-              this.setStorage(_self.user.username, _self.user.password);
+              _self.setStorage(_self.user.username, _self.user.password);
 
               // cleanup
               _self.showpls = true;
@@ -146,7 +146,7 @@ export default {
               console.log("Updated details in the store; you have permissions: editor");
 
               // localstorage for login persistence
-              this.setStorage(_self.user.username, _self.user.password);
+              _self.setStorage(_self.user.username, _self.user.password);
 
               // cleanup
               _self.showpls = true;
@@ -162,7 +162,7 @@ export default {
               console.log("Updated details in the store; you have permissions: viewOnly");
 
               // localstorage for login persistence
-              this.setStorage(_self.user.username, _self.user.password);
+              _self.setStorage(_self.user.username, _self.user.password);
 
               // cleanup
               _self.showpls = true;

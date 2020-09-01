@@ -328,6 +328,18 @@ export default {
 }
 
 
+
+
+
+ul {
+  padding-inline-start: 1vw;
+}
+
+li {
+  margin: 5px 0px;
+}
+
+
 /* sidenav */
 .sidenav {
   height: 100%;

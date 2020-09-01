@@ -28,7 +28,7 @@
         <button class="modal-default-button" @click.stop="submitNote">Ok</button>
       </div>
     </modal>
-    
+
     <!-- Modal for options  -->
     <modal v-if="showOptions && isItViewOnly" @close="showOptions = false">
       <h3 slot="header">Options</h3>
@@ -213,6 +213,8 @@ textarea {
 div, span {
   display: inline;
 }
+
+
 
 ul {
   padding-left: 1em;
