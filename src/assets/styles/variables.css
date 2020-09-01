@@ -1,0 +1,69 @@
+/*
+Variable name format:
+--theme-descriptionOfThing
+Themes:
+- light
+*/
+
+:root {
+   --font-family: Avenir, Helvetica, Arial, sans-serif;
+   --background: #FFFFFF;
+   --background-dark: #111111;
+   --text: #2c3e50;
+   --text-light: #FFFFFF;
+   --text-accent: #42b983;
+
+   --dark-red: #8b0000;
+   --light-red: #ffcccb;
+}
+
+a {
+  color: var(--text-accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  color: var(--text);
+  background-color: var(--text);
+}
+
+/* buttons */
+button {
+  cursor: pointer;
+}
+
+.transparent-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.border {
+  border: var(--text) 1.5px solid;
+  border-radius: 2px;
+}
+
+.random-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 5vw;
+}
+
+.right {
+  float: right;
+}
+.left {
+  float: left;
+}
+
+/* input */
+.textInput {
+  margin: 5px 0;
+  padding: 5px 10px;
+}
+.textInput:focus {
+  border: var(--text) 2px solid;
+}
