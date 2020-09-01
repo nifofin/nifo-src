@@ -13,6 +13,16 @@
           <button class="changePassButton" @click="APass = true">Change Admin Password</button>
         </div>
       </div>
+      <div class="editPass">
+        <h3>Change Editor Password</h3>
+        <div style="margin: 1vh 1vw;">
+          <input type="text" name="oldEPassword" placeholder="old password" v-model="passwords.oldEPass" autocomplete="off">
+          <br>
+          <input type="text" name="newEPassword" placeholder="new password" v-model="passwords.newEPass" autocomplete="off">
+          <br>
+          <button class="changePassButton" @click="EPass = true">Change Editor Password</button>
+        </div>
+      </div>
       <div class="viewPass">
         <h3>Change View Password</h3>
         <div style="margin: 1vh 1vw;">
@@ -35,10 +45,22 @@
         <button @click="changeAPass" style="float: right; border: none; color: white; background-color: #42b983; text-align: center; padding: 5px 10px; cursor: pointer; border-radius: 2px;">Change</button>
       </div>
     </modal>
+
+    <modal v-if="EPass" @close="EPass = false">
+      <h3 slot="header">Confirm editor password change</h3>
+      <div slot="body">
+        Change the old password, <b>{{passwords.oldEPass}}</b>, to the new password, <b>{{passwords.newEPass}}</b>?
+      </div>
+      <div slot="footer">
+        <button @click="EPass = false" style="border: none; background-color: transparent; outline: none; float: right; padding: 5px 10px; cursor: pointer;">Cancel</button>
+        <button @click="changeEPass" style="float: right; border: none; color: white; background-color: #42b983; text-align: center; padding: 5px 10px; cursor: pointer; border-radius: 2px;">Change</button>
+      </div>
+    </modal>
+
     <modal v-if="VPass" @close="VPass = false">
       <h3 slot="header">Confirm view password change</h3>
       <div slot="body">
-        Change <b>{{passwords.oldVPass}}</b> to <b>{{passwords.newVPass}}</b>?
+        Change the old password, <b>{{passwords.oldVPass}}</b> to the new password, <b>{{passwords.newVPass}}</b>?
       </div>
       <div slot="footer">
         <button @click="VPass = false" style="border: none; background-color: transparent; outline: none; float: right; padding: 5px 10px; cursor: pointer;">Cancel</button>
@@ -59,10 +81,13 @@ export default {
       passwords: {
         oldPass: "",
         newPass: "",
+        oldEPass: "",
+        newEPass: "",
         oldVPass: "",
         newVPass: ""
       },
       APass: false,
+      EPass: false,
       VPass: false
     }
   },
@@ -80,6 +105,15 @@ export default {
         }
         _self.APass = false;
         _self.passwords.oldPass = ""; _self.passwords.newPass = "";
+      })
+    },
+    changeEPass() {
+      var _self = this;
+      db.collection("users").doc(this.$store.state.user.username).get().then(function(doc) {
+        if (doc.data().editor == _self.passwords.oldEPass) {
+          db.collection("users").doc(_self.$store.state.user.username).update({editor: _self.passwords.newEPass});
+          console.log("Successfully changed the editor password");
+        }
       })
     },
     changeVPass() {
@@ -109,10 +143,16 @@ export default {
 
 .passwords {
   margin-left: 1vw;
+  margin-bottom: 10vh;
 }
 
 .adminPass {
   display: inline-block;
+  width: 40vw;
+}
+
+.editPass {
+  display: block;
   width: 40vw;
 }
 
@@ -123,11 +163,11 @@ export default {
 
 .changePassButton {
   margin-top: 2vh;
-  border: var(--light-dark-red) 1.5px solid;
+  border: var(--dark-red) 1.5px solid;
   border-radius: 2px;
   padding: 5px 10px;
-  background-color: var(--light-light-red);
-  color: var(--light-dark-red);
+  background-color: var(--light-red);
+  color: var(--dark-red);
   cursor: pointer;
   outline: none;
 }

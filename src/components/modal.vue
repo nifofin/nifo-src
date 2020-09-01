@@ -55,7 +55,7 @@ export default {
 }
 
 .modal-container {
-  width: 300px;
+  width: 40vw;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -67,7 +67,7 @@ export default {
 
 .modal-header h3 {
   margin-top: 0;
-  color: var(--light-light);
+  color: var(--light);
 }
 
 .modal-body {
@@ -78,7 +78,7 @@ export default {
   float: right;
   border: none;
   color: white;
-  background-color: var(--light-light);
+  background-color: var(--light);
   text-align: center;
   padding: 5px 10px;
   cursor: pointer;

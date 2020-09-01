@@ -27,10 +27,10 @@
       <div slot="body">
         <input type="text" name="name" placeholder="name" autocomplete="off" v-model="adding.name" autofocus>
         <br>
-        <textarea name="content" placeholder="content" cols="40" rows="20" v-model="adding.content"></textarea>
+        <textarea name="content" placeholder="content" cols="100" rows="20" v-model="adding.content"></textarea>
       </div>
       <div slot="footer">
-        Adding to {{ this.model.name }}
+        <div style="width: 20vw;">Adding to {{ this.model.name }}</div>
         <button class="modal-cancel-button" @click.stop="showing = false">Cancel</button>
         <button class="modal-default-button" @click.stop="submitNote">Ok</button>
       </div>
@@ -42,7 +42,7 @@
         <h4>Edit</h4>
         <input type="text" name="name" v-model="tempName" autofocus autocomplete="off" placeholder="name">
         <br>
-        <textarea name="content" placeholder="content" cols="40" rows="20" v-model="tempContent"></textarea>
+        <textarea name="content" placeholder="content" cols="100" rows="20" v-model="tempContent"></textarea>
       </div>
       <div slot="footer">
         <button class="modal-cancel-button" @click.stop="showOptions = false">Cancel</button>
@@ -58,8 +58,7 @@ import Vue from "vue";
 import { db } from "../firestore";
 import Modal from "../components/modal.vue";
 import showdown from "showdown";
-//import VRuntimeTemplate from "v-runtime-template";
-//import {VueMathjax} from "vue-mathjax";
+//import _ from "underscore";
 
 export default {
   name: "item",
@@ -82,8 +81,40 @@ export default {
       },
       tempName: this.model.name,
       tempContent: this.model.content,
-      tempArray: []
+      tempArray: [],
+      changedBCEsc: false,
+      changing: false
     }
+  },
+  mounted() {
+    window.addEventListener("keydown", (e) => {
+      if (this.$router.currentRoute.path == "/") {
+        if (e.key == "e") {
+          this.changedBCEsc = true;
+          this.changeType();
+        }
+        else if (e.key == "r") {
+          this.showContent = !this.showContent;
+          this.$nextTick().then(()=>{window.MathJax.typeset(); })
+        }
+        else if (e.key == "t") {
+          this.showContent = false;
+        }
+        else if (e.key == "y") {
+          this.showContent = true;
+          this.$nextTick().then(()=>{window.MathJax.typeset(); })
+        }
+        else if (e.key == "s") {
+          this.open = !this.open;
+        }
+        else if (e.key == "d") {
+          this.open = false;
+        }
+        else if (e.key == "f") {
+          this.open = true;
+        }
+      }
+    })
   },
   created() {
     this.tempArray = this.model.children;
@@ -110,14 +141,16 @@ export default {
       if (this.isFolder) { this.open = !this.open; }
     },
     changeType() {
-      if (!this.isFolder) {
+      if (!this.isFolder && !this.changing) {
+        this.changing = true;
         Vue.set(this.model, "children", []);
         var _self = this;
         var asdf = "depth" + (this.model.depth+1).toString(10)
         db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection(asdf).where("parent", "==", this.model.id).get()
         .then(function(querySnapshot) {
           if (querySnapshot.empty) {
-            _self.showing = true;
+            if (!_self.changedBCEsc) {_self.showing = true;}
+            else {_self.changedBCEsc = false; }
           } else {
           querySnapshot.forEach(function(doc) {
             if (!_self.model.children.includes(doc)) {
@@ -127,7 +160,8 @@ export default {
               depth: _self.model.depth+1,
               id: doc.id
             }); }
-          }) }
+          });
+          _self.model.children.sort((a,b) => (a.name > b.name) ? 1 : -1);}
         });
         this.open = true;
       }
@@ -177,6 +211,10 @@ export default {
 
 <style scoped>
 @import "../assets/styles/variables.css";
+
+textarea {
+  max-width: 35vw;
+}
 
 div, span {
   display: inline;

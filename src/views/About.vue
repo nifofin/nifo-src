@@ -95,11 +95,25 @@
             <p><b>Double click: </b>Create new folder, retrieve any existing elements from DB, and add an item</p>
             <p><b>Right click: </b>Show content of element</p>
             <p><b>Hover: </b>When you hover over an item, an edit button will appear. Click on it to edit or delete the item.</p>
+            <br>
+            <h4>Hotkeys</h4>
+            <p><b>e: </b>find if subitems exist under any current item, and if so, expands it out</p>
+            <p><b>r: </b>toggles "showContent"</p>
+            <p><b>t: </b>sets "showContent" to false</p>
+            <p><b>y: </b>sets "showContent" to true</p>
+            <p><b>s: </b>toggles folders</p>
+            <p><b>d: </b>collapses all folders</p>
+            <p><b>f: </b>expands all folders</p>
+            <br>
+            <p><b>i: </b>import a json file (<b>WIP, broken</b>)</p>
+            <p><b>o: </b>export your notes as a json file</p>
           </div>
           <h3 id="permissions">Permissions</h3>
           <div style="margin-left: 1vw;">
             <p><b>Admin: </b> Admin permissions allow the user to change the admin password and view password, as well as change the structure and content of the notes.</p>
+            <p><b>Editor: </b>Editor permissions allow the user to view and change the structure and content of the notes. By default, the editor password is the same as the admin password, meaning that you must go to Profile - General Settings - Change Passwords - Change Editor Password and change it to something different first. </p>
             <p><b>View: </b> View permissions, in contrast, are much more limited, only allowing the user to view the list of notes. By default, the view password is empty, although a user with admin permissions may change it in <router-link class="routerLink" to="/profile">Profile->General->Change View Password.</router-link></p>
+            <p>Note: This is the order of importance from high to low, meaning if two or more permission types have the same password, the highest permission type will be granted upon sign-in.</p>
           </div>
       </div>
 
@@ -119,10 +133,26 @@
         <h3 id="misc-faq">Misc</h3>
         <div style="margin-left: 1vw;">
         <p><b>Q: </b>Can I import/export things?</p>
-        <p><b>A: </b>No, this feature still hasn't been implemented yet. In the near future, we'll probably add this feature.</p>
+        <p><b>A: </b>Exporting is possible—press "o" and a download called "nifo_export_username.json", with username replaced by your username, should start.
+        <br> As of 08/31/2020, importing is still not possible. </p>
+
         <br>
+
         <p><b>Q: </b>What happens if I take a common username that may be used as a public account in the future? </p>
         <p><b>A: </b>If your username is used as a public account, your account's username will be changed (i.e. if your username was "C++", it could be changed to "C++1"). If it is changed, you will find a notice of it on the <router-link class="routerLink" to="/announcements">Announcements</router-link> page. </p>
+
+        <br>
+
+        <p><b>Q: </b>Can you explain the different types of formatting?</p>
+        <p><b>A: </b>Nifo supports markdown formatting with <a href="http://showdownjs.com/">Showdown</a>. For the most part, it uses standard markdown formatting, but for specifics, check out <a href="https://github.com/showdownjs/showdown/wiki/Showdown's-Markdown-syntax">Showdown's markdown syntax</a> on their github wiki!
+        <br> Nifo also supports typesetting math with <a href="https://www.mathjax.org/">MathJax</a>. For inline math, rather than the standard "$", use "\\(" and "\\)" around your math instead! For displayed math, you can use "$$" or "\\[" and "\\]". For more information, check out <a href="http://docs.mathjax.org/en/latest/basic/mathematics.html">MathJax's documentation</a>. (Note: we don't support MathML or AsciiMath, only TeX and LaTeX.)
+        <br>If you have any suggestions on what other types of formatting we should support, feel free to <a href="#contact">let us know</a>!</p>
+
+        <br>
+
+        <p><b>Q: </b>How are my notes sorted?</p>
+        <p><b>A: </b>Notes are sorted in alphabetical order (because firestore does that). </p>
+
         </div>
       </div>
 
@@ -139,35 +169,115 @@
 
       <h2 id="todo">Todo</h2>
       <div style="margin-left: 1vw;">
+        <p>If you would like to help out, please <a href="#contact">contact</a> our devs!</p>
         <h3 id="Todo">Todo</h3>
           <div style="margin-left: 1vw;">
             <ul>
-              <li>Make it so that when you double click to create/retrieve a folder, it stops highlighting the text (idk how to do this)</li>
-              <li>Dark theme (needs restructuring of css so that it uses variables or something idk)</li>
-              <li>Import by uploading a JSON file (easy enough, I'll add this functionality sometime)</li>
-              <li>Export by downloading a JSON file (note: exporting will probably be nigh-impossible without a lot of pointless effort on my end because of how dumbly firestore is set up which makes it so that you can't really retrieve all the subdocuments and stuff in a single query facepalm)</li>
-              <li>C++ windows version (importing and exporting is finished, but the display + in-app editing is still a rip)</li>
-              <li>Android (not started) (android studio is going to kill my computer)</li>
-              <li>Apple (not started) (unlikely to happen because you have to pay to be on appstore :( )</li>
+              <li>CSS</li>
+                <ul>
+                  <li>Fix the CSS for the add note modal - limit width so it doesn't push the buttons down</li>
+                  <li>Clean up CSS</li>
+                  <li>Themes (with <a href="https://joshuatz.com/posts/2019/coding-a-css-theme-switcher-a-multitude-of-web-dev-options/">javascript</a> or <a href="https://www.mynotepaper.com/create-multiple-themes-in-vuejs">scss</a>)</li>
+                    <ul>
+                      <li>Dark theme</li>
+                      <li>Allow editor-only users to see the Profile page and ONLY the Appearance tab</li>
+                    </ul>
+                </ul>
+              <li>JS</li>
+                <ul>
+                  <li>Make it so that when you double click to create/retrieve a folder, it stops highlighting the text (idk how to do this) (potential <a target="_blank" href="https://stackoverflow.com/questions/10342965/how-to-prevent-a-double-click-from-highlighting-web-page-text-using-javascript">fix</a>)</li>
+                </ul>
+              <li>Import/export</li>
+                <ul>
+                  <li>Import by uploading a JSON file (ugh I have to do some dumb stuff, I'll get to it sometime, temp code (commented out) is in main.js)</li>
+                </ul>
+              <li>Apps</li>
+                <ul>
+                  <li>C++ (windows? cross-platform?) version (attempting this in raw C++, will be using a library to simplify things soon)</li>
+                  <ul>
+                    <li>display</li>
+                    <li>edit + add</li>
+                    <li>Potential libraries: </li>
+                    <ul>
+                      <li><a target="_blank" href="https://github.com/Immediate-Mode-UI/Nuklear">https://github.com/Immediate-Mode-UI/Nuklear</a></li>
+                      <li><a target="_blank" href="https://github.com/rxi/microui">https://github.com/rxi/microui</a></li>
+                      <li><a target="_blank" href="https://github.com/idea4good/GuiLite">https://github.com/idea4good/GuiLite</a></li>
+                    </ul>
+                  </ul>
+                <li>Android (not started) (android studio is going to kill my computer)</li>
+                <li>Apple (not started) (unlikely to happen because you have to pay to be on appstore :( )</li>
+              </ul>
             </ul>
           </div>
         <h3 id="done">Done</h3>
           <div style="margin-left: 1vw;">
             <ul>
-              <li>Added MathJax to automatically render anything you write with tex (bro this took ridiculously long to do because some people made a dumb thing called "vue-mathjax" which is actually trash)</li>
-              <li>Added another page to the profile/settings page—Appearance, where you can change your theme (only light/default theme so far, which uses Vue's default colors)</li>
-              <li>Make it so that when you're in the Profile page and you have the sidebar open, if you click somewhere not on the sidebar or on one of the links, the sidebar disappears. (QoL)
-              <li>Support markdown in notes</li>
-              <li>Upload a (non obsfucated) version to <a class="routerLink" href="https://github.com/nifofin/nifo-src">github</a></li>
-              <li>Make it so that when you click outside of a modal window, the modal window disappears. </li>
-              <li>Fixed css of the Add Note modal (if the title is too long it looks wack)</li>
-              <li>Added profile page, where (if you have permissions) you can change the admin password and the view password</li>
-              <li>Added two different forms of permissions (depending on the password used): "admin"/"edit"/"collaborator", aka full permissions, and "view-only", aka you can only see notes but you can't change anything</li>
-              <li>Sync with firestore database</li>
-              <li>Add, edit, and delete in a modal window</li>
-              <li>Added home page, added tree view so you can single click to expand/unexpand (toggle), double click to create folder/retrieve subnotes/subfolders/subdocuments from th db, and right click to show "content"</li>
-              <li>Added login page</li>
-              <li>Added docs page</li>
+              <li>C++ version</li>
+                <ul>
+                  <li>import</li>
+                  <li>export</li>
+                </ul>
+              <li>Hotkeys</li>
+                <ul>
+                  <li>e - expand folders if exist</li>
+                  <li>r - toggle content</li>
+                  <li>t - hide all content</li>
+                  <li>y - show all content</li>
+                  <li>s - toggle folder expand/collapse</li>
+                  <li>d - collapse all folders</li>
+                  <li>f - expand all folders</li>
+                  <li>o - export notes</li>
+                    <ul>
+                      <li>export as JSON</li>
+                      <li>cleaned up JSON with a replacer array</li>
+                    </ul>
+                  <li>Hotkeys only work in home page (checks router path)</li>
+                  <li>Pressing e multiple times in succession won't add duplicates (added changing variable and a check for it)</li>
+                </ul>
+              <li>Formatting</li>
+                <ul>
+                  <li>Markdown via Showdown</li>
+                  <li>TeX via MathJax (vue-mathjax is garbage, wasted so many hours of my life, I highly recommend that you avoid it : D )</li>
+                </ul>
+              <li>Unobsfucated <a href="https://github.com/nifofin/nifo-src">github</a> version</li>
+              <li>Profile page</li>
+                <ul>
+                  <li>General tab</li>
+                  <li>Change admin password</li>
+                  <li>Change view-only password</li>
+                  <li>Appearance tab</li>
+                  <li>Sidebar (for tabs) disappears on clickaway</li>
+                </ul>
+              <li>Permissions</li>
+                <ul>
+                  <li>Admin - full permissions</li>
+                  <li>Editor - can only view and edit notes, can't change the password</li>
+                  <li>View-only - can only view notes, can't change or edit anything</li>
+                </ul>
+              <li>Firestore DB - sync</li>
+              <li>Modal window - add, edit, and delete notes</li>
+                <ul>
+                  <li>Fixed CSS - button padding</li>
+                  <li>Clickaway - modal disappears on click outside of modal window</li>
+                </ul>
+              <li>Tree view</li>
+                <ul>
+                  <li>single click - toggle expand/unexpand child folders</li>
+                  <li>double click - create/retrieve folder from db</li>
+                  <li>right click - toggle content</li>
+                  <li>Sorted alphabetically by name (rather than document id)</li>
+                </ul>
+              <li>Home/main page</li>
+              <li>Login page</li>
+                <ul>
+                  <li>LocalStorage to save login details</li>
+                    <ul>
+                      <li>Reverifies on page load (in case people attempt editing localstorage)</li>
+                      <li>Prevents login component from showing until finished verifying</li>
+                      <li>Changed logout to a instead of router-link so that logout properly works with v-on:click</li>
+                    </ul>
+                </ul>
+              <li>Documentation page</li>
             </ul>
           </div>
       </div>
@@ -211,12 +321,12 @@ export default {
 hr {
   height: 1px;
   border: 0;
-  color: var(--light-dark);
-  background-color: var(--light-dark);
+  color: var(--dark);
+  background-color: var(--dark);
 }
 
 .routerLink {
-  color: var(--light-light);
+  color: var(--light);
   text-decoration: none;
 }
 
@@ -248,14 +358,14 @@ li {
 
 .sidenav a {
   text-decoration: none;
-  color: var(--light-dark);
+  color: var(--dark);
   text-align: left;
   margin-left: 2vw;
   display: block;
 }
 
 .sidenav a:hover {
-  color: var(--light-light);
+  color: var(--light);
 }
 
 .main {

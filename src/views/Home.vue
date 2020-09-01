@@ -32,6 +32,22 @@ export default {
       })
     if (_self.smth.treeData.length == 0) { _self.smth.treeData.push({name: "Sample", content: "Sample content", depth: 0, id: "1"}); }
     })
+    window.addEventListener("keydown", (e) => {
+      if (e.key == "i") {
+        // import
+      }
+      else if (e.key == "o" && this.$router.currentRoute.path == "/") {
+        // export
+        // clean up json
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.smth.treeData, ["name", "content", "children", ""], 4));
+        var downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href",     dataStr);
+        downloadAnchorNode.setAttribute("download",  "nifo_export_" + this.$store.state.user.username + ".json");
+        document.body.appendChild(downloadAnchorNode); // required for firefox
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+      }
+    })
   }
 };
 </script>

@@ -20,7 +20,7 @@ const routes = [
     component: loginComponent
   },
   {
-    path: "/home",
+    path: "/",
     name: "home",
     component: homeComponent,
     meta: {
@@ -42,7 +42,7 @@ const routes = [
   },
   {
     path: "*",
-    redirect: "/home"
+    redirect: "/"
   }
 ];
 

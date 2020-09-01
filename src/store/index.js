@@ -14,7 +14,8 @@ const store = new Vuex.Store({
       username: "",
       password: "",
       loggedIn: false,
-      viewOnly: false
+      viewOnly: false,
+      editOnly: false
     }
   },
   //plugins: [easyFirestore],
@@ -31,9 +32,13 @@ const store = new Vuex.Store({
       state.user.password = "";
       state.user.loggedIn = false;
       state.user.viewOnly = false;
+      state.user.editOnly = false;
     },
     toggleViewOnly(state) {
       state.user.viewOnly = !state.user.viewOnly;
+    },
+    toggleEditOnly(state) {
+      state.user.editOnly = !state.user.editOnly;
     }
   },
   actions: {},
