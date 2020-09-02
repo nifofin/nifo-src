@@ -70,6 +70,8 @@
             <p><b>Username: </b>Biology</p>
             <p><b>Username: </b>Chemistry</p>
             <p><b>Username: </b>Physics</p>
+            <br>
+            <p><b>Username: </b>USIH_2020-2021</p>
           </div>
           <h3 id="contributing">Contributing: </h3>
           <div style="margin-left: 1vw;">
@@ -91,9 +93,9 @@
           </div>
           <h3 id="controls">Actions</h3>
           <div style="margin-left: 1vw;">
-            <p><b>Single click: </b>Toggle folder expansion</p>
-            <p><b>Double click: </b>Create new folder, retrieve any existing elements from DB, and add an item</p>
-            <p><b>Right click: </b>Show content of element</p>
+            <p><b>Single click/q: </b>Toggle folder expansion</p>
+            <p><b>Double click/n: </b>Create new folder, retrieve any existing elements from DB, and add an item</p>
+            <p><b>Right click/Enter: </b>Show content of element</p>
             <p><b>Hover: </b>When you hover over an item, an edit button will appear. Click on it to edit or delete the item.</p>
             <br>
             <h4>Hotkeys</h4>
@@ -104,9 +106,16 @@
             <p><b>s: </b>toggles folders</p>
             <p><b>d: </b>collapses all folders</p>
             <p><b>f: </b>expands all folders</p>
+            <p><b>m: </b>toggles mouse interaction (left click, double click, right click)</p>
+            <p><b>Escape: </b>leave the modal window</p>
             <br>
             <p><b>i: </b>import a json file (<b>WIP, broken</b>)</p>
             <p><b>o: </b>export your notes as a json file</p>
+            <br>
+            <h4>Selection</h4>
+            <p><b>ArrowUp: </b>go up</p>
+            <p><b>ArrowDown: </b>go down</p>
+            <p><b>z: </b>toggle selection - selection will always reappear at root folder</p>
           </div>
           <h3 id="permissions">Permissions</h3>
           <div style="margin-left: 1vw;">
@@ -174,7 +183,6 @@
             <ul>
               <li>CSS</li>
                 <ul>
-                  <li>Fix the CSS for the add note modal - limit width so it doesn't push the buttons down</li>
                   <li>Clean up CSS</li>
                   <li>Themes (with <a href="https://joshuatz.com/posts/2019/coding-a-css-theme-switcher-a-multitude-of-web-dev-options/">javascript</a> or <a href="https://www.mynotepaper.com/create-multiple-themes-in-vuejs">scss</a>)</li>
                     <ul>
@@ -216,7 +224,7 @@
                   <li>import</li>
                   <li>export</li>
                 </ul>
-              <li>Hotkeys</li>
+              <li>Hotkeys/Keyboard navigation</li>
                 <ul>
                   <li>e - expand folders if exist</li>
                   <li>r - toggle content</li>
@@ -232,6 +240,13 @@
                     </ul>
                   <li>Hotkeys only work in home page (checks router path)</li>
                   <li>Pressing e multiple times in succession won't add duplicates (added changing variable and a check for it)</li>
+                  <li>m - disable/enable (toggle) mouse interaction (left, double, and right click) - useful if you want to right click a link or read your notes without hiding/showing a part of the structure</li>
+                  <li>Selection is highlighted (colors are inverted)</li>
+                  <li>ArrowUp and ArrowDown to move</li>
+                  <li>z - toggle selection - when retoggled, selection focuses on root folder</li>
+                  <li>Escape - leave modal window</li>
+                  <li>Enter - same function as right click, shows content</li>
+                  <li>n - same function as double click, creates new folder and retrieves any existing elements; if it's already a folder or a folder doesn't exist, create a new note</li>
                 </ul>
               <li>Formatting</li>
                 <ul>
@@ -265,6 +280,7 @@
                   <li>double click - create/retrieve folder from db</li>
                   <li>right click - toggle content</li>
                   <li>Sorted alphabetically by name (rather than document id)</li>
+                  <li>Link default class - grey-link - link color is no longer green</li>
                 </ul>
               <li>Home/main page</li>
               <li>Login page</li>
@@ -277,6 +293,9 @@
                     </ul>
                 </ul>
               <li>Documentation page</li>
+                <ul>
+                  <li>Scrollactive in sidebar navigation</li>
+                </ul>
             </ul>
           </div>
       </div>

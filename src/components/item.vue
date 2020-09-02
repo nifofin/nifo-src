@@ -1,8 +1,10 @@
 <template>
   <li>
     <div :class="{bold: isFolder}" @click="toggle" @dblclick="changeType" @contextmenu="handler($event)" style="width: 100vw;" class="hovering">
-      <p style="display: inline-block; margin: 0;">{{model.name}}</p>
-      <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
+      <div style="padding: 5px 10px;" :class="{selecting: this.$store.state.currentSelected == path}">
+        <p style="display: inline-block; margin: 2.5px 5px;">{{model.name}}</p>
+        <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
+      </div>
       <button  v-if="isItViewOnly" class="options-button" @click.stop="showOptions = true"><img src="../assets/colorful_icon.png" style="height: 15px; width: auto;"></button>
       <div class="modelContent" style="display: block;" v-if="this.showContent">
         <div v-html="htmledContent"></div>
@@ -10,9 +12,9 @@
     </div>
 
     <ul v-show="open" v-if="isFolder">
-      <item class="item" v-for="mdl in model.children" :model="mdl" :before="model" :key="mdl.id"></item>
-      <li v-if="isItViewOnly" class="add" @click="addChild">+</li>
-    </ul>
+        <item class="item" v-for="mdl in model.children" :model="mdl" :before="model" :key="mdl.id" :path="path + '.children[' + model.children.findIndex(thing => thing.id == mdl.id) + ']'"></item>
+        <li v-if="isItViewOnly" class="add" style="padding: 5px 10px;" @click="addChild"><div style="margin: 2.5px 5px">+</div></li>
+      </ul>
 
     <!-- Modal for adding -->
     <modal v-if="this.showing && isItViewOnly" @close="showing = false">
@@ -23,7 +25,7 @@
         <textarea name="content" placeholder="content" cols="100" rows="20" v-model="adding.content"></textarea>
       </div>
       <div slot="footer">
-        <div style="width: 20vw;">Adding to {{ this.model.name }}</div>
+        <div style="width: 25vw; display: inline-block;">Adding to {{ this.model.name }}</div>
         <button class="modal-cancel-button" @click.stop="showing = false">Cancel</button>
         <button class="modal-default-button" @click.stop="submitNote">Ok</button>
       </div>
@@ -54,11 +56,29 @@ import Modal from "../components/modal.vue";
 import showdown from "showdown";
 //import _ from "underscore";
 
+// give the html produced from markdown a class
+const classMap = {
+  a: "grey-link"
+}
+
+const bindings = Object.keys(classMap)
+  .map(key => ({
+    type: 'output',
+    regex: new RegExp(`<${key}(.*)>`, 'g'),
+    replace: `<${key} class="${classMap[key]}" $1>`
+  }));
+
+const conv = new showdown.Converter({
+  simpleLineBreaks: true,
+  extensions: [...bindings]
+});
+
 export default {
   name: "item",
   props: {
     model: Object,
-    before: Object
+    before: Object,
+    path: String
   },
   data() {
     return {
@@ -77,12 +97,14 @@ export default {
       tempContent: this.model.content,
       tempArray: [],
       changedBCEsc: false,
-      changing: false
+      changing: false,
+      mouse: true
     }
   },
   mounted() {
-    window.addEventListener("keydown", (e) => {
-      if (this.$router.currentRoute.path == "/") {
+    window.addEventListener("keyup", (e) => {
+      var tar = e.target.tagName.toLowerCase();
+      if (this.$router.currentRoute.path == "/" && tar != "input" && tar != "textarea") {
         if (e.key == "e") {
           this.changedBCEsc = true;
           this.changeType();
@@ -107,6 +129,39 @@ export default {
         else if (e.key == "f") {
           this.open = true;
         }
+        else if (e.key == "m") {
+          this.mouse = !this.mouse;
+        }
+        else if (e.key == "Escape") {
+          this.showOptions = false;
+          this.showing = false;
+        }
+        else if (this.$props.path == this.$store.state.currentSelected && (Date.now() - this.$store.state.lastKeyDown > 100)) {
+          if (e.key == "ArrowUp") {
+            this.$store.commit("updateKeyDown",Date.now());
+            this.$store.commit("changeSelected", {direction: "up", showing: this.open, folder: this.model.children && this.model.children.length});
+          }
+          else if (e.key == "ArrowDown" ) {
+            this.$store.commit("updateKeyDown",Date.now());
+            this.$store.commit("changeSelected", {direction: "down", showing: this.open, folder: this.model.children && this.model.children.length});
+          }
+          else if (e.key == "n") {
+            // is it a folder
+            if (this.isFolder) {
+              this.addChild();
+            }
+            // if it's not one
+            else {
+              this.changeType();
+            }
+          }
+          else if (e.key == "Enter") {
+            this.showContent = !this.showContent;
+          }
+          else if (e.key == "q") {
+            this.open = !this.open;
+          }
+        }
       }
     })
   },
@@ -121,21 +176,24 @@ export default {
       return !this.$store.state.user.viewOnly;
     },
     htmledContent() {
-      var converter = new showdown.Converter({simpleLineBreaks: true});
-      return converter.makeHtml(this.model.content);
+      // moved this above
+      //var converter = new showdown.Converter({simpleLineBreaks: true});
+      return conv.makeHtml(this.model.content);
     }
   },
   methods: {
     handler(e) {
-      this.showContent = !this.showContent;
-      e.preventDefault();
-      this.$nextTick().then(()=>{window.MathJax.typeset(); })
+      if (this.mouse) {
+        this.showContent = !this.showContent;
+        e.preventDefault();
+        this.$nextTick().then(()=>{window.MathJax.typeset(); })
+      }
     },
     toggle() {
-      if (this.isFolder) { this.open = !this.open; }
+      if (this.isFolder && this.mouse) { this.open = !this.open; }
     },
     changeType() {
-      if (!this.isFolder && !this.changing) {
+      if (!this.isFolder && !this.changing && this.mouse) {
         this.changing = true;
         Vue.set(this.model, "children", []);
         var _self = this;
@@ -192,9 +250,7 @@ export default {
     }
   },
   components: {
-    Modal,
-    //VRuntimeTemplate,
-    //"vue-mathjax": VueMathjax
+    Modal
   }
 };
 </script>
@@ -209,8 +265,6 @@ textarea {
 div, span {
   display: inline;
 }
-
-
 
 ul {
   padding-left: 1em;
@@ -229,6 +283,7 @@ input {
 
 .modelContent {
   background-color: rgb(240, 240, 240);
+  color: var(--text);
   padding-left: 2vw;
   padding-right: 2vw;
   padding-top: 1vh;
@@ -254,5 +309,10 @@ input {
 
 .options-button:hover > .options-button {
   visibility: visible;
+}
+
+.selecting {
+  background-color: var(--text);
+  color: var(--text-light);
 }
 </style>

@@ -98,7 +98,7 @@ export default {
           db.collection("users").doc(_self.$store.state.user.username).collection("dataTree").doc("userNotes").collection("depth0").doc("123").set({name: _self.$store.state.user.username, content: "Root folder\nSingle click to toggle folders\nDouble click to create a new folder or retrieve it from the DB\nRight click to view content", id: "123", depth: "0", parent: "none"});
 
           // localstorage for login persistence
-          this.setStorage(_self.user2.username, _self.user2.password);
+          _self.setStorage(_self.user2.username, _self.user2.password);
         }
         // otherwise you can't register
         else {
