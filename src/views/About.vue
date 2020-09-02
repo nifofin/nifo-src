@@ -7,7 +7,7 @@
           <li><a href='#introduction' class="scrollactive-item">Introduction</a></li>
           <li><a href="#publicaccounts" class="scrollactive-item"><b>Public Accounts</b></a></li>
           <ul style="list-style: none;">
-            <li><a href="#edit" class="scrollactive-item">Admin</a></li>
+            <li><a href="#edit" class="scrollactive-item">Editor</a></li>
             <li><a href="#viewonly" class="scrollactive-item">View-only</a></li>
             <li><a href="#contributing" class="scrollactive-item">Contributing</a></li>
           </ul>
@@ -59,7 +59,7 @@
 
         <h2 id="publicaccounts">Public Accounts</h2>
         <div style="margin-left: 1vw;">
-          <h3 id="edit">Admin: </h3>
+          <h3 id="edit">Editor: </h3>
           <div style="margin-left: 1vw;">
             <p><b>Username: </b>test <b>Password: </b>test</p>
           </div>
