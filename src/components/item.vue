@@ -74,6 +74,7 @@ const conv = new showdown.Converter({
   simplifiedAutoLink: true,
   excludeTrailingPunctuationFromURLs: true,
   tables: true,
+  tasklists: true,
   extensions: [...bindings]
 });
 
