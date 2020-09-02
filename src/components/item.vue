@@ -70,6 +70,10 @@ const bindings = Object.keys(classMap)
 
 const conv = new showdown.Converter({
   simpleLineBreaks: true,
+  strikethrough: true,
+  simplifiedAutoLink: true,
+  excludeTrailingPunctuationFromURLs: true,
+  tables: true,
   extensions: [...bindings]
 });
 
