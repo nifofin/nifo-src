@@ -9,7 +9,7 @@
     <div>
       <input class="textInput border" type="text" name="username" placeholder="username" v-model="user.username" autocomplete="off" autofocus>
       <br>
-      <input class="textInput border" type="password" name="password" placeholder="password" v-model="user.password" autocomplete="off">
+      <input class="textInput border" type="text" name="password" placeholder="password" v-model="user.password" autocomplete="off">
       <br>
       <button @click="signIn" class="border login-button">Login</button>
     </div>
