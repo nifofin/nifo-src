@@ -96,7 +96,7 @@
             <p><b>Single click/q: </b>Toggle folder expansion</p>
             <p><b>Double click/n: </b>Create new folder, retrieve any existing elements from DB, and add an item</p>
             <p><b>Right click/Enter: </b>Show content of element</p>
-            <p><b>Hover: </b>When you hover over an item, an edit button will appear. Click on it to edit or delete the item.</p>
+            <p><b>Hover/z: </b>When you hover over an item, an edit button will appear. Click on it to edit or delete the item.</p>
             <br>
             <h4>Hotkeys</h4>
             <p><b>e: </b>find if subitems exist under any current item, and if so, expands it out</p>
@@ -162,6 +162,9 @@
         <p><b>Q: </b>How are my notes sorted?</p>
         <p><b>A: </b>Notes are sorted in alphabetical order (because firestore does that). </p>
 
+        <p><b>Q: </b>What display options do I have?</p>
+        <p><b>A: </b>You can choose whether to add/edit notes in a modal or in the markdown editor. </p>
+        <p>In the future, multiple themes will be added.</p>
         </div>
       </div>
 
@@ -181,17 +184,25 @@
         <h3 id="Todo">Todo</h3>
           <div style="margin-left: 1vw;">
             <ul>
+              <li>HTML</li>
+                <ul>
+                  <li>Clean up HTML</li>
+                  <li>Turn the documentation into a markdown file</li>
+                  <li>Clean up documentation</li>
+                </ul>
               <li>CSS</li>
                 <ul>
                   <li>Clean up CSS</li>
                   <li>Themes (with <a href="https://joshuatz.com/posts/2019/coding-a-css-theme-switcher-a-multitude-of-web-dev-options/">javascript</a> or <a href="https://www.mynotepaper.com/create-multiple-themes-in-vuejs">scss</a>)</li>
                     <ul>
                       <li>Dark theme</li>
-                      <li>Allow editor-only users to see the Profile page and ONLY the Appearance tab</li>
                     </ul>
                 </ul>
               <li>JS</li>
                 <ul>
+                  <li>Clean up JS</li>
+                  <li>It's a known bug that if you refresh while in the Profile page Vue will throw an error of 'maximum call stack size exceeded' because of weird stuff with Vue Router and validation settings; to fix just go to another page</li>
+                  <li>It's a known bug that when you're using the markdown editor and you open the options, the content won't appear unless you click inside of the textarea</li>
                   <li>Make it so that when you double click to create/retrieve a folder, it stops highlighting the text (idk how to do this) (potential <a target="_blank" href="https://stackoverflow.com/questions/10342965/how-to-prevent-a-double-click-from-highlighting-web-page-text-using-javascript">fix</a>)</li>
                 </ul>
               <li>Import/export</li>
@@ -247,6 +258,7 @@
                   <li>Escape - leave modal window</li>
                   <li>Enter - same function as right click, shows content</li>
                   <li>n - same function as double click, creates new folder and retrieves any existing elements; if it's already a folder or a folder doesn't exist, create a new note</li>
+                  <li>z - open up the editor (same effect as if you clicked on options button)</li>
                 </ul>
               <li>Formatting</li>
                 <ul>
@@ -261,6 +273,8 @@
                   <li>Change view-only password</li>
                   <li>Appearance tab</li>
                   <li>Sidebar (for tabs) disappears on clickaway</li>
+                  <li>Toggle use modal option</li>
+                  <li>Editor-only users can now view the Profile page, and only the Appearance tab (not the General tab)</li>
                 </ul>
               <li>Permissions</li>
                 <ul>
@@ -273,6 +287,11 @@
                 <ul>
                   <li>Fixed CSS - button padding</li>
                   <li>Clickaway - modal disappears on click outside of modal window</li>
+                </ul>
+              <li>Markdown editor - uses easy mardown editor</li>
+                <ul>
+                  <li>Add, edit, and delete</li>
+                  <li>Freely switch between the markdown editor mode and the modal mode in Profile -> Appearance -> Options -> Use modal</li>
                 </ul>
               <li>Tree view</li>
                 <ul>
@@ -313,6 +332,7 @@
             <li><a href="https://github.com/eddiemf/vue-scrollactive">VueScrollactive</a> (for docs index highlighting)</li>
             <li><a href="https://github.com/simplesmiler/vue-clickaway">VueClickaway</a> (for sidebar hiding when clicking on another portion of the screen)</li>
             <li><a href="https://www.mathjax.org/">MathJax</a> (for rendering math stuff)</li>
+            <li><a href="https://github.com/Ionaru/easy-markdown-editor">Easy Markdown Editor</a> (for adding a plain text markdown editor with an in-textarea preview)</li>
           </ul>
         </div>
       </div>

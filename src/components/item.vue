@@ -11,13 +11,30 @@
       </div>
     </div>
 
+    <div v-show="this.showing && isItViewOnly && !this.$store.state.useModal" class="editor-wrapper">
+      <input class="editor-title" type="text" v-model="adding.name" placeholder="Title" />
+      <textarea v-bind:id="model.id" style="display: none;" placeholder="Content..."></textarea>
+      <button class="editor-default-button" @click="submitNote">Add</button>
+      <button class="editor-default-button" @click="showing = false">Cancel</button>
+    </div>
+
+      <div v-show="showOptions && isItViewOnly && !this.$store.state.useModal" class="editor-wrapper">
+        <input class="editor-title" type="text" v-model="tempName" placeholder="Title" />
+        <textarea v-bind:id="model.id + 'edit'" v-model="tempContent" style="display: none;" placeholder="Content..."></textarea>
+        <button class="editor-default-button" @click="editNote">Edit</button>
+        <button class="editor-default-button" @click="deleteNote">Delete</button>
+        <button class="editor-default-button" @click="showOptions = false">Cancel</button>
+      </div>
+
     <ul v-show="open" v-if="isFolder">
         <item class="item" v-for="mdl in model.children" :model="mdl" :before="model" :key="mdl.id" :path="path + '.children[' + model.children.findIndex(thing => thing.id == mdl.id) + ']'"></item>
         <li v-if="isItViewOnly" class="add" style="padding: 5px 10px;" @click="addChild"><div style="margin: 2.5px 5px">+</div></li>
       </ul>
 
     <!-- Modal for adding -->
-    <modal v-if="this.showing && isItViewOnly" @close="showing = false">
+
+
+    <modal v-if="this.showing && isItViewOnly && this.$store.state.useModal" @close="showing = false">
       <h3 slot="header">Add note</h3>
       <div slot="body">
         <input type="text" name="name" placeholder="name" autocomplete="off" v-model="adding.name" autofocus>
@@ -31,12 +48,17 @@
       </div>
     </modal>
 
+
+
+
+
     <!-- Modal for options  -->
-    <modal v-if="showOptions && isItViewOnly" @close="showOptions = false">
+
+    <modal v-if="showOptions && isItViewOnly && this.$store.state.useModal" @close="showOptions = false">
       <h3 slot="header">Options</h3>
       <div slot="body">
         <h4>Edit</h4>
-        <input type="text" name="name" v-model="tempName" autofocus autocomplete="off" placeholder="name">
+        <input type="text" name="name" class="editor-title" v-model="tempName" autofocus autocomplete="off" placeholder="name">
         <br>
         <textarea name="content" placeholder="content" cols="100" rows="20" v-model="tempContent"></textarea>
       </div>
@@ -46,6 +68,9 @@
         <button style="float: left;" class="modal-default-button" @click.stop="editNote">Ok</button>
       </div>
     </modal>
+
+
+
   </li>
 </template>
 
@@ -54,6 +79,7 @@ import Vue from "vue";
 import { db } from "../firestore";
 import Modal from "../components/modal.vue";
 import showdown from "showdown";
+import EasyMDE from "easymde";
 //import _ from "underscore";
 
 // give the html produced from markdown a class
@@ -77,6 +103,9 @@ const conv = new showdown.Converter({
   tasklists: true,
   extensions: [...bindings]
 });
+
+// editor
+var easyMDE, easyMDE2;
 
 export default {
   name: "item",
@@ -107,6 +136,31 @@ export default {
     }
   },
   mounted() {
+    var _self = this;
+    easyMDE = new EasyMDE({
+      element: document.getElementById(_self.$props.model.id),
+      previewRender: function(plaintext, preview) {
+        setTimeout(function() {
+          preview.innerHTML = conv.makeHtml(plaintext);
+        })
+        return "Loading...";
+      },
+      spellChecker: false,
+      forceSync: true
+    });
+
+    easyMDE2 = new EasyMDE({
+      element: document.getElementById(_self.$props.model.id + "edit"),
+      previewRender: function(plaintext, preview) {
+        setTimeout(function() {
+          preview.innerHTML = conv.makeHtml(plaintext);
+        })
+        return "Loading...";
+      },
+      spellChecker: false,
+      forceSync: true
+    });
+
     window.addEventListener("keyup", (e) => {
       var tar = e.target.tagName.toLowerCase();
       if (this.$router.currentRoute.path == "/" && tar != "input" && tar != "textarea") {
@@ -166,6 +220,9 @@ export default {
           else if (e.key == "q") {
             this.open = !this.open;
           }
+          else if (e.key == "z") {
+            this.showOptions = !this.showOptions;
+          }
         }
       }
     })
@@ -206,7 +263,7 @@ export default {
         db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection(asdf).where("parent", "==", this.model.id).get()
         .then(function(querySnapshot) {
           if (querySnapshot.empty) {
-            if (!_self.changedBCEsc) {_self.showing = true;}
+            if (!_self.changedBCEsc) {_self.addCild();}
             _self.changedBCEsc = false;
           }
           else {
@@ -223,20 +280,25 @@ export default {
       this.showing = true;
     },
     deleteNote() {
-      var asdf = "depth" + this.model.depth.toString(10);
-      var fads = this.$store.state.user.username;
-      db.collection("users").doc(fads).collection("dataTree").doc("userNotes").collection(asdf).doc(this.model.id).delete()
-      .then(function() {
-        console.log("Document successfully deleted");
-      }).catch(function(error) {
-        console.error("Error removing document: ", error);
-      })
-      var index = this.before.children.findIndex(x => x.name == this.model.name);
-      this.before.children.splice(index, 1);
+      if (this.model.depth > 0) {
+        var asdf = "depth" + this.model.depth.toString(10);
+        var fads = this.$store.state.user.username;
+        db.collection("users").doc(fads).collection("dataTree").doc("userNotes").collection(asdf).doc(this.model.id).delete()
+        .then(function() {
+          console.log("Document successfully deleted");
+        }).catch(function(error) {
+          console.error("Error removing document: ", error);
+        })
+        var index = this.before.children.findIndex(x => x.name == this.model.name);
+        this.before.children.splice(index, 1);
+      }
+      else {
+        console.log("Sorry, you can't delete the root folder. ");
+      }
     },
     editNote() {
       this.model.name = this.tempName;
-      this.model.content = this.tempContent;
+      this.model.content = this.tempContent ? this.tempContent : easyMDE2 ;
       db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection("depth" + this.model.depth.toString(10)).doc(this.model.id).update({name: this.model.name, content: this.model.content});
       this.showOptions = false;
     },
@@ -245,13 +307,13 @@ export default {
       this.showing = false;
       var data = {
         name: this.adding.name,
-        content: this.adding.content,
+        content: this.adding.content ? this.adding.content : easyMDE.value(),
         depth: this.adding.depth,
         id: this.adding.name + new Date().getTime().toString(10)
       }
       db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection("depth" + data.depth.toString(10)).doc(data.id).set({name: data.name, content: data.content, depth: data.depth, parent: this.model.id});
       this.model.children.push(data);
-      this.adding.name = ""; this.adding.content = "";
+      this.adding.name = ""; this.adding.content = ""; easyMDE.value("");
     }
   },
   components: {
@@ -319,5 +381,30 @@ input {
 .selecting {
   background-color: var(--text);
   color: var(--text-light);
+}
+
+.editor-title {
+  font: 18px "Helvetica Neue", "Xin Gothic", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft YaHei", sans-serif;
+  background: transparent;
+    padding: 4px;
+    width: 100%;
+    border: none;
+    outline: none;
+    opacity: 0.6;
+}
+
+.editor-default-button {
+  border: 1px var(--text) solid;
+  border-radius: 3px;
+  background-color: var(--background);
+  text-align: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  user-select: none;
+  margin: 0 10px;
+  margin-bottom: 10px;
+}
+.editor-default-button:hover {
+  background-color: var(--background-grey);
 }
 </style>

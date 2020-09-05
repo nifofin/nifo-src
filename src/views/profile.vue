@@ -8,7 +8,7 @@
         <button class="transparent-button close-sidenav" @click="showSidenav = false"><img class="close-image" src="../assets/white_x.png"></button>
 
         <!-- the various components/tabs you can choose from -->
-        <li><a class="sidenav-text" @click="tab('general')">General</a></li>
+        <li v-if="!this.$store.state.user.editOnly && !this.$store.state.user.viewOnly"><a class="sidenav-text" @click="tab('general')">General</a></li>
         <li><a class="sidenav-text" @click="tab('appearance')">Appearance</a></li>
       </ul>
     </div>
@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       showSidenav: false,
-      menuPartShown: "general"
+      menuPartShown: !this.$store.state.user.editOnly ? "general" : "appearance"
     }
   },
   components: {

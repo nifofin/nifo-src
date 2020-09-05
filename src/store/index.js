@@ -16,11 +16,15 @@ const store = new Vuex.Store({
     },
     currentSelected: "children[0]", // children[0].children[0]
     children: [],
-    lastKeyDown: null
+    lastKeyDown: null,
+    useModal: false
   },
   modules: {
   },
   mutations: {
+    changeUseModal(state, data) {
+      state.useModal = data;
+    },
     updateCurrentSelected(state, data) {
       state.currentSelected = data;
     },

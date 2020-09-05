@@ -101,7 +101,7 @@ router.beforeEach( (to, from, next) => {
   // store.state.user.loggedIn is in /src/router/index.js - check the const store variable
   if (to.meta.auth && !store.state.user.loggedIn) {
     // if the router is trying to redirect you to /profile, and if you have admin perms (or only viewOnly / editOnly perms)
-    if (to.name == "profile" && !store.state.user.viewOnly && !store.state.user.editOnly) {
+    if (to.name == "profile" && !store.state.user.viewOnly) {
       // if you have admin perms, go ahead
       next("/profile");
     }
@@ -120,7 +120,7 @@ router.beforeEach( (to, from, next) => {
 // some reference: https://vuejs.org/v2/guide/instance.html
 // https://forum.vuejs.org/t/what-does-render-h-h-app-mean/53313/2
 // https://vuejs.org/v2/guide/render-function.html
-// look at App.vue next 
+// look at App.vue next
 new Vue({
   router,
   store,

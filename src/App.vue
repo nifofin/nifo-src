@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/docs">Docs</router-link>
-      <router-link v-if="isLoggedIn && !this.$store.state.user.viewOnly && !this.$store.state.user.editOnly" to="/profile">Profile</router-link>
-      <a v-if="isLoggedIn" v-on:click="logout()" replace>Logout ({{this.$store.state.user.username}})</a>
+      <router-link style="user-select: none;" to="/">Home</router-link>
+      <router-link style="user-select: none;" to="/docs">Docs</router-link>
+      <router-link style="user-select: none;" v-if="isLoggedIn && !this.$store.state.user.viewOnly" to="/profile">Profile</router-link>
+      <a v-if="isLoggedIn" v-on:click="logout()" style="user-select: none;" replace>Logout ({{this.$store.state.user.username}})</a>
     </div>
-    
+
     <router-view />
   </div>
 </template>

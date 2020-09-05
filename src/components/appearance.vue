@@ -4,13 +4,25 @@
   <div class="themeSection">
     <h2>Theme</h2>
     <button class="theme-button">Light theme (default)</button>
+    <h2>Options</h2>
+    <input type="checkbox" @click="changeUseModal" id="useModal" name="useModal" value="useModal"/><label for="useModal">Use Modal</label>
   </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: "appearance"
+  name: "appearance",
+  mounted() {
+    document.getElementById("useModal").checked = localStorage.useModal === "true";
+  },
+  methods: {
+    changeUseModal() {
+      //console.log("changed!", document.getElementById("useModal").checked);
+      localStorage.setItem("useModal", document.getElementById("useModal").checked);
+      this.$store.commit("changeUseModal", document.getElementById("useModal").checked);
+    }
+  }
 }
 </script>
 

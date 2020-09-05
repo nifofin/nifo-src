@@ -26,15 +26,12 @@ export default {
   },
   mounted() {
     var _self = this;
-    console.log("Retrieving root folder");
     // retrieve whatever has depth 0 (the root folder)
     db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection("depth0").get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         // add it to children
-        console.log("Adding to children");
         _self.smth.children.push({name: doc.data().name, content: doc.data().content, depth: 0, id: doc.id, parent: "none"});
-        console.log("Added ", doc.data().name, " to children");
       })
 
     // if there's nothing for some odd reason, push a sample one

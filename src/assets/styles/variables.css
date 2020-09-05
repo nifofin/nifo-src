@@ -8,6 +8,7 @@ Themes:
 :root {
    --font-family: Avenir, Helvetica, Arial, sans-serif;
    --background: #FFFFFF;
+   --background-grey: #EEEEEE;
    --background-dark: #111111;
    --text: #2c3e50;
    --text-light: #FFFFFF;
