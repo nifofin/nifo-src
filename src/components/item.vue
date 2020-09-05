@@ -298,7 +298,7 @@ export default {
     },
     editNote() {
       this.model.name = this.tempName;
-      this.model.content = this.tempContent ? this.tempContent : easyMDE2 ;
+      this.model.content = this.$store.state.useModal ? this.tempContent : easyMDE2.value() ;
       db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection("depth" + this.model.depth.toString(10)).doc(this.model.id).update({name: this.model.name, content: this.model.content});
       this.showOptions = false;
     },
@@ -349,7 +349,7 @@ input {
 }
 
 .modelContent {
-  background-color: rgb(240, 240, 240);
+  background-color: rgba(1,1,1,0.01);
   color: var(--text);
   padding-left: 2vw;
   padding-right: 2vw;
