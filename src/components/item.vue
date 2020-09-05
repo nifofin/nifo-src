@@ -216,11 +216,12 @@ export default {
           }
           else if (e.key == "Enter") {
             this.showContent = !this.showContent;
+            this.$nextTick().then(()=>{window.MathJax.typeset(); })
           }
           else if (e.key == "q") {
             this.open = !this.open;
           }
-          else if (e.key == "z") {
+          else if (e.key == "x") {
             this.showOptions = !this.showOptions;
           }
         }
@@ -263,7 +264,7 @@ export default {
         db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection(asdf).where("parent", "==", this.model.id).get()
         .then(function(querySnapshot) {
           if (querySnapshot.empty) {
-            if (!_self.changedBCEsc) {_self.addCild();}
+            if (!_self.changedBCEsc) {_self.addChild();}
             _self.changedBCEsc = false;
           }
           else {

@@ -96,7 +96,7 @@
             <p><b>Single click/q: </b>Toggle folder expansion</p>
             <p><b>Double click/n: </b>Create new folder, retrieve any existing elements from DB, and add an item</p>
             <p><b>Right click/Enter: </b>Show content of element</p>
-            <p><b>Hover/z: </b>When you hover over an item, an edit button will appear. Click on it to edit or delete the item.</p>
+            <p><b>Hover/x: </b>When you hover over an item, an edit button will appear. Click on it to edit or delete the item.</p>
             <br>
             <h4>Hotkeys</h4>
             <p><b>e: </b>find if subitems exist under any current item, and if so, expands it out</p>
@@ -258,7 +258,7 @@
                   <li>Escape - leave modal window</li>
                   <li>Enter - same function as right click, shows content</li>
                   <li>n - same function as double click, creates new folder and retrieves any existing elements; if it's already a folder or a folder doesn't exist, create a new note</li>
-                  <li>z - open up the editor (same effect as if you clicked on options button)</li>
+                  <li>x - open up the editor (same effect as if you clicked on options button)</li>
                 </ul>
               <li>Formatting</li>
                 <ul>
