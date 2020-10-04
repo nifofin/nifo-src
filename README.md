@@ -9,60 +9,22 @@ Nifo currently supports the following types of formatting:
 - Markdown
 - TeX
 
-Nifo currently uses the following:
-
-- Vue.js
-  - VueScrollactive
-  - Vue Clickaway
-- Firebase
-- Showdown
-- MathJax
-- and more
-
 If you wish to contribute to Nifo, please contact one of the developers by:
 
 - emailing sevenisreallycommon at gmail dot com
 
 If you have any feedback or suggestions, please let us know by contacting us or submitting an issue.
 
+[Documentation](https://github.com/nifofin/nifo-src/blob/master/src/views/about_markdown.md)
+
 ## Downloading
 
 Download it and make sure to `npm install` all of the dependencies in `package.json`.
 
-## Instructions for committing to the public ver
-These are present in `deploy.sh`.
-```bash
-# build
-npm run build
-```
+## Committing
 
-```bash
-# navigate into the build output directory
-cd dist
-```
+Look at `deploy.sh`.
 
-```bash
-# commit
-git init
-git add -A
-git commit -m "deploy"
-```
-
-```bash
-# push
-git push -f git@github.com:nifofin/nifo.git master:gh-pages
-```
-Optional:
-```bash
-# cd back to root folder
-cd ../
-```
-
-## Instructions for committing to the src
-```bash
-git add -u
-git commit -m "message"
-git push -f git@github.com:nifofin/nifo-src.git master
 ```
 
 ## A guide
