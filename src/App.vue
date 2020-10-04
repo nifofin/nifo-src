@@ -8,12 +8,41 @@
     </div>
 
     <router-view />
+
+    <pdfModal v-show="this.showPdfModal" @close="showPdfModal = false">
+      <div>hi</div>
+    </pdfModal>
   </div>
 </template>
 
 <script>
+  import $ from 'jquery';
+
+  import pdfModal from "./components/pdfModal.vue";
+
+  $(document).ready(function() {
+    // move to moutned function in dexport default
+
+  });
+
   export default {
     name: "App",
+    data() {
+      return {
+        showPdfModal: false,
+        test: "blah"
+      }
+    },
+    mounted() {
+      var _self = this;
+      $(document.body).on('click', 'a[href*=".pdf"]', function(e) {
+        e.preventDefault();
+        _self.showPdfModal = true;
+        var pdfEmbed = document.getElementById("embedDiv");
+        pdfEmbed.innerHTML = "<embed src='" + $(this).attr('href') + "' frameborder='0' width='100%' height='" + ($(window).height() * 9 / 10) + "'>";
+        document.getElementById("pdfModalId").appendChild(pdfEmbed);
+      });
+    },
     methods: {
       logout() {
         // clears info from the store
@@ -31,6 +60,9 @@
       isLoggedIn() {
         return this.$store.state.user.loggedIn;
       }
+    },
+    components: {
+      pdfModal
     }
   }
 </script>

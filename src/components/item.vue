@@ -5,7 +5,8 @@
         <p style="display: inline-block; margin: 2.5px 5px;">{{model.name}}</p>
         <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
       </div>
-      <button  v-if="isItViewOnly" class="options-button" @click.stop="showOptions = true"><img src="../assets/colorful_icon.png" style="height: 15px; width: auto;"></button>
+      <button v-if="isItViewOnly" class="options-button" @click.stop="showOptions = true"><img src="../assets/colorful_icon.png" style="height: 15px; width: auto;"></button>
+      <button v-if="isItViewOnly" class="options-button" @click.stop='deleteThing()'><img src="../assets/trash.png" style="height: 15px; width: auto;"></button>
       <div class="modelContent" style="display: block;" v-if="this.showContent">
         <div v-html="htmledContent"></div>
       </div>
@@ -315,6 +316,11 @@ export default {
       db.collection("users").doc(this.$store.state.user.username).collection("dataTree").doc("userNotes").collection("depth" + data.depth.toString(10)).doc(data.id).set({name: data.name, content: data.content, depth: data.depth, parent: this.model.id});
       this.model.children.push(data);
       this.adding.name = ""; this.adding.content = ""; easyMDE.value("");
+    },
+    deleteThing() {
+      if (window.confirm("Do you really want to delete '" + this.model.name + "'?")) {
+        this.deleteNote();
+      }
     }
   },
   components: {
@@ -361,6 +367,8 @@ input {
   margin-top: 5px;
   font-weight: normal;
   border-radius: 2px;
+  border-top: 2px var(--text) solid;
+  border-bottom: 2px var(--text) solid;
 }
 
 .options-button {

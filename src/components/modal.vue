@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 @import "../assets/styles/variables.css";
 
 .modal-mask {

@@ -9,6 +9,7 @@
 
         <!-- the various components/tabs you can choose from -->
         <li v-if="!this.$store.state.user.editOnly && !this.$store.state.user.viewOnly"><a class="sidenav-text" @click="tab('general')">General</a></li>
+        <br v-if="!this.$store.state.user.editOnly && !this.$store.state.user.viewOnly">
         <li><a class="sidenav-text" @click="tab('appearance')">Appearance</a></li>
       </ul>
     </div>
@@ -80,7 +81,8 @@ export default {
 /* text for switching tabs */
 .sidenav-text {
   color: var(--text-light);
-  font-size: 2vh;
+  font-size: 3vh;
+  font-family: var(--font-family);
 }
 
 /* close sidenav */
